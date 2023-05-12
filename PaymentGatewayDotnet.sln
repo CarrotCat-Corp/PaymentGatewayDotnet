@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentGatewayDotnet", "PaymentGatewayDotnet\PaymentGatewayDotnet.csproj", "{EA2FA6BB-EC53-4ADE-B1BE-5B6AAC6441CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentGatewayDotnet.UnitTests", "PaymentGatewayDotnet.UnitTests\PaymentGatewayDotnet.UnitTests.csproj", "{B0F76EED-6B57-4C05-897C-60DF54F31DCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentGatewayDotnet.EndToEndTests", "PaymentGatewayDotnet.EndToEndTests\PaymentGatewayDotnet.EndToEndTests.csproj", "{CA3AC921-65F3-40AF-849E-49B1D1180553}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA2FA6BB-EC53-4ADE-B1BE-5B6AAC6441CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA2FA6BB-EC53-4ADE-B1BE-5B6AAC6441CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA2FA6BB-EC53-4ADE-B1BE-5B6AAC6441CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA2FA6BB-EC53-4ADE-B1BE-5B6AAC6441CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0F76EED-6B57-4C05-897C-60DF54F31DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0F76EED-6B57-4C05-897C-60DF54F31DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0F76EED-6B57-4C05-897C-60DF54F31DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0F76EED-6B57-4C05-897C-60DF54F31DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA3AC921-65F3-40AF-849E-49B1D1180553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA3AC921-65F3-40AF-849E-49B1D1180553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA3AC921-65F3-40AF-849E-49B1D1180553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA3AC921-65F3-40AF-849E-49B1D1180553}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

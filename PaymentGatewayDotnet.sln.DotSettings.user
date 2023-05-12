@@ -1,0 +1,28 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=743903e9_002D3e1f_002D401c_002Da51e_002Dd1aaf309d833/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Tests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.StoredCredentials.StoredCredentialsIndicatorParametersTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::CA3AC921-65F3-40AF-849E-49B1D1180553::net6.0::PaymentGatewayDotnet.EndToEndTests.GatewayClassTests.DirectPost_TransactionWithValidCard_TransactionIsApproved&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.CreditCardTests.ToKeyValuePairs_AllFieldsAreValid_ValidListOfKeyValues&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.FinancialRequests.FinancialRequestTests.ToKeyValuePairs_GIveenObjectWithAmount_GeneratesValidAmount&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::CA3AC921-65F3-40AF-849E-49B1D1180553::net6.0::PaymentGatewayDotnet.EndToEndTests.GatewayClassTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.AchData.AchTest.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.InstallmentBIlling.InstallmentBillingDataTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.PartialPayments.PartialPaymentTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.RecurringRequests.RecurringPlanRequestTest.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.AddressTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.BillingTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.ShippingTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.DriversLicenseTests.ToKeyValuePairs_AllFieldsAreValid_ValidListOfKeyValues&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.ItemTests.ToKeyValuePairs_AllFieldsAreValid_ValidListOfKeyValues&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.DriversLicenseTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.OrderTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.PaymentCredentialsTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.PaymentDescriptorTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.Shared.PaymentFacilitatorTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.CustomerVaultRequests.CustomerVaultRequestTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.InvoicingRequest.InvoicingRequestTests.ToKeyValuePairs_GivenObject_GeneratesValidRequest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::CA3AC921-65F3-40AF-849E-49B1D1180553::net6.0::PaymentGatewayDotnet.EndToEndTests.GatewayClientTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
