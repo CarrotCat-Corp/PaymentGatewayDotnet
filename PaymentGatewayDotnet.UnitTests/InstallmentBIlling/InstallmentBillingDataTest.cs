@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using PaymentGatewayDotnet.Model.InstallmentBilling;
+using PaymentGatewayDotnet.Model.PaymentApi.InstallmentBilling;
 
 namespace PaymentGatewayDotnet.UnitTests.InstallmentBIlling;
 

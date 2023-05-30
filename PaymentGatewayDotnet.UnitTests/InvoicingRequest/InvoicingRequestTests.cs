@@ -1,6 +1,4 @@
-
-
-using PaymentGatewayDotnet.Model.InvoicingRequests;
+using PaymentGatewayDotnet.Model.PaymentApi.InvoicingRequests;
 using PaymentGatewayDotnet.Model.Shared;
 
 namespace PaymentGatewayDotnet.UnitTests.InvoicingRequest;
@@ -11,7 +9,7 @@ public class InvoicingRequestTests
         [Test]
     public void ToKeyValuePairs_GivenObject_GeneratesValidRequest()
     {
-        var request = new Model.InvoicingRequests.InvoicingRequest("abc")
+        var request = new Model.PaymentApi.InvoicingRequests.InvoicingRequest("abc")
         {
             Order = new Order
             {

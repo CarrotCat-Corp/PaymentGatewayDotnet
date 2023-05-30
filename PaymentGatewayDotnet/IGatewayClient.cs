@@ -1,8 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using PaymentGatewayDotnet.Model;
-using PaymentGatewayDotnet.Model.FinancialRequests;
-using PaymentGatewayDotnet.Model.PaymentApiResponseModel;
+using PaymentGatewayDotnet.Model.PaymentApi;
+using PaymentGatewayDotnet.Model.PaymentApi.PaymentApiResponseModel;
+using PaymentGatewayDotnet.Model.QueryApi;
 
 namespace PaymentGatewayDotnet
 {
@@ -19,5 +20,15 @@ namespace PaymentGatewayDotnet
         /// <param name="request">IPaymentApiRequest Object. I.E. FinancialRequest, InvoicingRequest, RecurringRequest</param>
         /// <returns>PaymentApiResponse object </returns>
         Task<PaymentApiResponse> PaymentApiPost(IPaymentApiRequest request);
+
+        /// <summary>
+        /// Implementation of Query API.
+        ///
+        /// <br/>
+        /// Refer to gateway documentation for more information
+        /// </summary>
+        /// <param name="request">IQueryApiRequest Object. I.E. QueryApiRequest</param>
+        /// <returns>QueryApiResponse object </returns>
+        Task<QueryApiResponse> QueryApiPost(IQueryApiRequest request);
     }
 }

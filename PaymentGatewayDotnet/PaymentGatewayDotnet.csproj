@@ -2,19 +2,24 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <PackageId>PaymentGatewayDotnet</PackageId>
+        <PackageId>CarrotCat.PaymentGatewayDotnet</PackageId>
         <PackageVersion>1.0.0-beta</PackageVersion>
         <Authors>OlegS</Authors>
         <Company>CarrotCat Corp.</Company>
-        <Copyright>Copyright (c) CarrotCat Corp. 2023</Copyright>
+        <Copyright>Copyright 2023 CarrotCat Corp.</Copyright>
         <Title>PaymentGatewayDotnet</Title>
         <Description>PaymentGatewayDotnet is a library that provides comprehensive and convenient way to assemble and make transactions with `*.transactiongateway.com` type of gateways. The advantage of this library is that it brakes down gateway requests into logical and digestible chunks making it easier to build the requests. This library has both static and service implementations of gateway client and can be used both as stand-alone and via dependency injection.</Description>
-        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/CarrotCat-Corp/PaymentGatewayDotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/CarrotCat-Corp/PaymentGatewayDotnet</RepositoryUrl>
+        <PackageTags>PaymentGateway, NMI, Network Merchants, networkmerchants, Empyrean</PackageTags>
+        <AssemblyOriginatorKeyFile>CarrotCatCorpNuGet.snk</AssemblyOriginatorKeyFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="LICENSE.md" Pack="true" PackagePath="" />
-        <None Include="README.md" Pack="true" PackagePath="" />
+        <None Include="../LICENSE" Pack="true" PackagePath="" />
+        <None Include="../README.md" Pack="true" PackagePath="" />
     </ItemGroup>
+    
 </Project>

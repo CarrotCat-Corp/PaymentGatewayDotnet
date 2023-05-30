@@ -1,5 +1,5 @@
 using PaymentGatewayDotnet.Model;
-using PaymentGatewayDotnet.Model.StoredCredentials;
+using PaymentGatewayDotnet.Model.PaymentApi.StoredCredentials;
 
 namespace PaymentGatewayDotnet.UnitTests.StoredCredentials;
 

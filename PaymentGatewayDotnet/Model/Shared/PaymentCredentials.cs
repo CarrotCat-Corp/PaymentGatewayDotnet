@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using PaymentGatewayDotnet.Model.AchData;
+using PaymentGatewayDotnet.Model.PaymentApi.AchData;
 
 namespace PaymentGatewayDotnet.Model.Shared
 {

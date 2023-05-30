@@ -17,6 +17,9 @@ namespace PaymentGatewayDotnet.Model.Shared
                 case "creditcard": return PaymentType.CreditCard;
                 case "check": return PaymentType.Check;
                 case "cash": return PaymentType.Cash;
+                case "cc": return PaymentType.CreditCard;
+                case "ck": return PaymentType.Check;
+                case "cs": return PaymentType.Cash;
                 default: return PaymentType.Undefined;
             }
         }

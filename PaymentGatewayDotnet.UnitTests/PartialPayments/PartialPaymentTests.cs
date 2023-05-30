@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using PaymentGatewayDotnet.Model.PartialPayments;
+using PaymentGatewayDotnet.Model.PaymentApi.PartialPayments;
 
 namespace PaymentGatewayDotnet.UnitTests.PartialPayments;
 

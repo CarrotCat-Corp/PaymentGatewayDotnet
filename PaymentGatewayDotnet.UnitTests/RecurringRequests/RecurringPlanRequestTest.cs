@@ -1,6 +1,6 @@
 
 
-using PaymentGatewayDotnet.Model.RecurringRequests;
+using PaymentGatewayDotnet.Model.PaymentApi.RecurringRequests;
 
 namespace PaymentGatewayDotnet.UnitTests.RecurringRequests;
 

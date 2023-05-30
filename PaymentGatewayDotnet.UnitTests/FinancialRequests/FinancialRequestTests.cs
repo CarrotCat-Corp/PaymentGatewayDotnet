@@ -1,11 +1,11 @@
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using PaymentGatewayDotnet.Model.FinancialRequests;
-using PaymentGatewayDotnet.Model.InstallmentBilling;
-using PaymentGatewayDotnet.Model.PartialPayments;
-using PaymentGatewayDotnet.Model.RetailDevises;
+using PaymentGatewayDotnet.Model.PaymentApi.FinancialRequests;
+using PaymentGatewayDotnet.Model.PaymentApi.InstallmentBilling;
+using PaymentGatewayDotnet.Model.PaymentApi.PartialPayments;
+using PaymentGatewayDotnet.Model.PaymentApi.RetailDevises;
+using PaymentGatewayDotnet.Model.PaymentApi.StoredCredentials;
 using PaymentGatewayDotnet.Model.Shared;
-using PaymentGatewayDotnet.Model.StoredCredentials;
 
 namespace PaymentGatewayDotnet.UnitTests.FinancialRequests;
 

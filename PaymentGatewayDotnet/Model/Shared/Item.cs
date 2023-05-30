@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.Model.Shared
 {
@@ -94,6 +96,36 @@ namespace PaymentGatewayDotnet.Model.Shared
             if (AlternateTaxId!=null) list.Add(new KeyValuePair<string, string>("item_alternate_tax_id_"+item, AlternateTaxId));
 
             return list;
+        }
+        
+        public static List<Item> FromXmlElements(IEnumerable<XElement> productElements)
+        {
+            var xElements = productElements.ToList();
+            if (!xElements.Any()) return null;
+
+            var items = new List<Item>();
+            
+            foreach (var pe in xElements)
+            {
+                items.Add(new Item
+                {
+                    ProductCode = pe.Element("product-code")?.Value, 
+                    Description = pe.Element("description")?.Value, 
+                    CommodityCode = pe.Element("commodity-code")?.Value,
+                    UnitOfMeasure = pe.Element("unit-of-measure")?.Value, 
+                    UnitCost = XmlUtilities.XElementToDecimal(pe.Element("unit-cost")), 
+                    Quantity = XmlUtilities.XElementToDecimal(pe.Element("quantity")), 
+                    TotalAmount = XmlUtilities.XElementToDecimal(pe.Element("total-amount")),
+                    TaxAmount = XmlUtilities.XElementToDecimal(pe.Element("tax-amount")), 
+                    TaxRate = XmlUtilities.XElementToDecimal(pe.Element("tax-rate")), 
+                    DiscountAmount = XmlUtilities.XElementToDecimal(pe.Element("discount-amount")), 
+                    DiscountRate = XmlUtilities.XElementToDecimal(pe.Element("discount-rate")),
+                    TaxType = pe.Element("tax-type")?.Value, 
+                    AlternateTaxId = pe.Element("alternate-tax-id")?.Value
+                });
+            }
+
+            return items;
         }
     }
 }

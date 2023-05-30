@@ -1,6 +1,6 @@
-using PaymentGatewayDotnet.Model.CustomerVaultRequests;
+using PaymentGatewayDotnet.Model.PaymentApi.CustomerVaultRequests;
+using PaymentGatewayDotnet.Model.PaymentApi.StoredCredentials;
 using PaymentGatewayDotnet.Model.Shared;
-using PaymentGatewayDotnet.Model.StoredCredentials;
 
 namespace PaymentGatewayDotnet.UnitTests.CustomerVaultRequests;
 

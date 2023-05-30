@@ -1,4 +1,4 @@
-using PaymentGatewayDotnet.Model.FinancialRequests;
+using PaymentGatewayDotnet.Model.PaymentApi.FinancialRequests;
 using PaymentGatewayDotnet.Model.Shared;
 
 namespace PaymentGatewayDotnet.EndToEndTests;
