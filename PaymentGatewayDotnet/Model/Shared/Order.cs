@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.Model.Shared
 {
@@ -70,6 +71,20 @@ namespace PaymentGatewayDotnet.Model.Shared
             }
 
             return list;
+        }
+        
+        public static Order FromXmlElement(XElement element)
+        {
+            if (element is null) return null;
+            var order = new Order();
+                
+            order.PoNumber = XmlUtilities.XElementToString(element.Element("ponumber"));
+            order.Id = XmlUtilities.XElementToString(element.Element("orderid"));
+            order.Description = XmlUtilities.XElementToString(element.Element("order_description"));
+            order.TaxAmount = XmlUtilities.XElementToDecimal(element.Element("tax"), "tax");
+            order.CustomerVatRegistration = XmlUtilities.XElementToString(element.Element("customertaxid"), "customertaxid");
+            
+            return order;
         }
     }
 }

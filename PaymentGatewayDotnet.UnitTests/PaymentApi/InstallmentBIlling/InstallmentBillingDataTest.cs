@@ -1,7 +1,6 @@
-using NUnit.Framework;
 using PaymentGatewayDotnet.Model.PaymentApi.InstallmentBilling;
 
-namespace PaymentGatewayDotnet.UnitTests.InstallmentBIlling;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.InstallmentBIlling;
 
 [TestFixture]
 public class InstallmentBillingDataTest

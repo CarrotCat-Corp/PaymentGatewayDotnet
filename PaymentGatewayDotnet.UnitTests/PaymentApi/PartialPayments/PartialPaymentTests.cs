@@ -1,7 +1,6 @@
-using NUnit.Framework;
 using PaymentGatewayDotnet.Model.PaymentApi.PartialPayments;
 
-namespace PaymentGatewayDotnet.UnitTests.PartialPayments;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.PartialPayments;
 
 [TestFixture]
 public class PartialPaymentTests

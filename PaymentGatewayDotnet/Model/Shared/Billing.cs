@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.Model.Shared
 {
     /// <summary>
     /// Represents client billing information
     /// </summary>
-    public sealed class Billing
+    public class Billing
     {
         /// <summary>
         /// In Customer Vault transactions, Billing id to be assigned or updated. I
@@ -32,6 +33,11 @@ namespace PaymentGatewayDotnet.Model.Shared
         /// Billing phone number
         /// </summary>
         public string Phone { get; set; }
+        
+        /// <summary>
+        /// Billing cell phone number. (It is not explicitly specified in the gateway specs.)
+        /// </summary>
+        public string CellPhone { get; set; }
         
         /// <summary>
         /// Billing fax number
@@ -62,11 +68,29 @@ namespace PaymentGatewayDotnet.Model.Shared
             if (Phone != null) list.Add(new KeyValuePair<string, string>(prefix+"phone", Phone));
             if (Fax != null) list.Add(new KeyValuePair<string, string>(prefix+"fax", Fax));
             if (Email != null) list.Add(new KeyValuePair<string, string>(prefix+"email", Email));
+            if (CellPhone != null) list.Add(new KeyValuePair<string, string>(prefix+"cell_phone", Email));
             
             
             if (Address != null) list.AddRange(Address.ToKeyValuePairs(prefix));
 
             return list;
+        }
+
+
+        public static Billing FromXmlElement(XElement element)
+        {
+            if (element is null) return null;
+            var billing = new Billing
+            {
+                FirstName = XmlUtilities.XElementToString(element.Element("first_name")),
+                LastName = XmlUtilities.XElementToString(element.Element("last_name")),
+                Company = XmlUtilities.XElementToString(element.Element("company")),
+                Email = XmlUtilities.XElementToString(element.Element("email")),
+                Phone = XmlUtilities.XElementToString(element.Element("phone")),
+                Fax = XmlUtilities.XElementToString(element.Element("fax")),
+                Address = Address.FromXmlElement(element)
+            };
+            return billing;
         }
     }
 }

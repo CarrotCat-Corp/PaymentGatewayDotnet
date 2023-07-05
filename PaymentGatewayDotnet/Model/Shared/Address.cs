@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.Model.Shared
 {
-    public sealed class Address
+    public class Address
     {
         public string Address1 { get; set; }
 
@@ -40,5 +41,21 @@ namespace PaymentGatewayDotnet.Model.Shared
 
             return list;
         }
+
+        public static Address FromXmlElement(XElement element)
+        {
+            if (element is null) return null;
+            var address = new Address
+            {
+                Address1 = XmlUtilities.XElementToString(element.Element("address_1")),
+                Address2 = XmlUtilities.XElementToString(element.Element("address_2")),
+                City = XmlUtilities.XElementToString(element.Element("city")),
+                StateProvince = XmlUtilities.XElementToString(element.Element("state")),
+                PostalZip = XmlUtilities.XElementToString(element.Element("postal_code")),
+                Country = XmlUtilities.XElementToString(element.Element("country"))
+            };
+            return address;
+        }
+        
     }
 }

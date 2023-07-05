@@ -38,8 +38,12 @@ namespace PaymentGatewayDotnet.Model.Shared
         {
             return !EnsureXElementExists(element) ? null : element?.Value;
         }
-
-
+        
+        public static bool? XElementToBool(XElement element, string name = "N/A", string parent = "N/A")
+        {
+            return !EnsureXElementExists(element) ? null : element?.Value?.Equals("true", StringComparison.OrdinalIgnoreCase);
+        }
+        
         public static bool EnsureXElementExistsAndNotNull(XElement element)
         {
             return element != null && !string.IsNullOrEmpty(element.Value.Trim());

@@ -1,6 +1,6 @@
 using PaymentGatewayDotnet.Model.PaymentApi.AchData;
 
-namespace PaymentGatewayDotnet.UnitTests.AchData;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.AchData;
 
 [TestFixture]
 public class AchTest

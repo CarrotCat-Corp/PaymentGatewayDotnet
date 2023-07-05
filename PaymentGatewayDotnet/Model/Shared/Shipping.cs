@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.Model.Shared
 {
@@ -48,6 +49,26 @@ namespace PaymentGatewayDotnet.Model.Shared
             if (Address != null) list.AddRange(Address.ToKeyValuePairs("shipping"));
             
             return list;
+        }
+        
+        public static Shipping FromXmlElement(XElement element)
+        {
+            if (element is null) return null;
+            var billing = new Shipping
+            {
+                FirstName = XmlUtilities.XElementToString(element.Element("first_name")),
+                LastName = XmlUtilities.XElementToString(element.Element("last_name")),
+                Company = XmlUtilities.XElementToString(element.Element("company")),
+                Email = XmlUtilities.XElementToString(element.Element("email")),
+                Phone = XmlUtilities.XElementToString(element.Element("phone")),
+                Fax = XmlUtilities.XElementToString(element.Element("fax")),
+                Amount = XmlUtilities.XElementToDecimal(element.Element("amount")),
+                // ShipFromPostalCode = XmlUtilities.XElementToString(element.Element("fax")),
+                TrackingNumber = XmlUtilities.XElementToString(element.Element("tracking")),
+                // Address = Address.FromXmlElement(element)
+
+            };
+            return billing;
         }
     }
 }   

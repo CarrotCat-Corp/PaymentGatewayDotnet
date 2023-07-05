@@ -1,7 +1,7 @@
 using PaymentGatewayDotnet.Model.PaymentApi.InvoicingRequests;
 using PaymentGatewayDotnet.Model.Shared;
 
-namespace PaymentGatewayDotnet.UnitTests.InvoicingRequest;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.InvoicingRequest;
 
 [TestFixture]
 public class InvoicingRequestTests

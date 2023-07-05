@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 using PaymentGatewayDotnet.Model.PaymentApi.FinancialRequests;
 using PaymentGatewayDotnet.Model.PaymentApi.InstallmentBilling;
 using PaymentGatewayDotnet.Model.PaymentApi.PartialPayments;
@@ -7,7 +5,7 @@ using PaymentGatewayDotnet.Model.PaymentApi.RetailDevises;
 using PaymentGatewayDotnet.Model.PaymentApi.StoredCredentials;
 using PaymentGatewayDotnet.Model.Shared;
 
-namespace PaymentGatewayDotnet.UnitTests.FinancialRequests;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.FinancialRequests;
 
 [TestFixture]
 public class FinancialRequestTests

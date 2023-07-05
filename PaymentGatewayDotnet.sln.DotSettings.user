@@ -24,5 +24,7 @@
     &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.CustomerVaultRequests.CustomerVaultRequestTests.ToString_ObjectCreated_ValidKeyValidPairs&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.InvoicingRequest.InvoicingRequestTests.ToKeyValuePairs_GivenObject_GeneratesValidRequest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::CA3AC921-65F3-40AF-849E-49B1D1180553::net6.0::PaymentGatewayDotnet.EndToEndTests.GatewayClientTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.QueryApi.ActionTest.FromXmlElement_XmlDocumentReceived_ObjectCreated&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::B0F76EED-6B57-4C05-897C-60DF54F31DCC::net6.0::PaymentGatewayDotnet.UnitTests.PaymentApi.AchData.TransactionTest.FromXmlElement_XmlDocumentReceived_ObjectCreated&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
