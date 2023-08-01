@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using PaymentGatewayDotnet.Model.Shared;
+using PaymentGatewayDotnet.Shared;
 
 namespace PaymentGatewayDotnet.UnitTests.Shared;
 

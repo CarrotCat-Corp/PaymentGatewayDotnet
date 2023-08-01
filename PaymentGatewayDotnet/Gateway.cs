@@ -1,10 +1,8 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using PaymentGatewayDotnet.Model;
-using PaymentGatewayDotnet.Model.PaymentApi;
-using PaymentGatewayDotnet.Model.PaymentApi.PaymentApiResponseModel;
-using PaymentGatewayDotnet.Model.QueryApi;
+using PaymentGatewayDotnet.Contracts;
+using PaymentGatewayDotnet.PaymentApi.Response;
 
 namespace PaymentGatewayDotnet
 {

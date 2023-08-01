@@ -1,5 +1,5 @@
-using PaymentGatewayDotnet.Model.PaymentApi.InvoicingRequests;
-using PaymentGatewayDotnet.Model.Shared;
+using PaymentGatewayDotnet.Shared;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.PaymentApi.InvoicingRequest;
 
@@ -9,8 +9,30 @@ public class InvoicingRequestTests
         [Test]
     public void ToKeyValuePairs_GivenObject_GeneratesValidRequest()
     {
-        var request = new Model.PaymentApi.InvoicingRequests.InvoicingRequest("abc")
+        var request = new PaymentGatewayDotnet.PaymentApi.Requests.InvoicingRequest("abc")
         {
+            Invoice = new Invoice
+            {
+                Id = null,
+                Amount = 0,
+                Tax = null,
+                PaymentTerms = null,
+                OrderDescription = null,
+                PaymentMethodsAllowed = null,
+                Website = null,
+                CustomerId = null,
+                CustomerTaxId = null,
+                Items = null,
+                Shipping = null,
+                Billing = new Billing
+                {
+                    Company = "abc",
+                    Address = new Address() { Address1 = "abc", },
+                    Email = "abc"
+                
+            },
+
+
             Order = new Order
             {
                 Id = "abc",
@@ -22,6 +44,7 @@ public class InvoicingRequestTests
                 Address = new Address() { Address1 = "abc", },
                 Email = "abc"
             },
+            
             Shipping = new Shipping
             {
                 FirstName = "abc",

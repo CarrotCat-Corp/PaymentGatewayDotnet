@@ -1,7 +1,7 @@
-
-
-using PaymentGatewayDotnet.Model.PaymentApi.RecurringRequests;
-using PaymentGatewayDotnet.Model.Shared;
+using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.PaymentApi.Requests;
+using PaymentGatewayDotnet.Shared;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.PaymentApi.RecurringRequests;
 

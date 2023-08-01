@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 using NUnit.Framework;
-using Action = PaymentGatewayDotnet.Model.QueryApi.Action;
+using Action = PaymentGatewayDotnet.QueryApi.Data.Action;
 
 namespace PaymentGatewayDotnet.UnitTests.QueryApi;
 

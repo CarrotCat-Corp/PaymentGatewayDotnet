@@ -1,4 +1,4 @@
-using PaymentGatewayDotnet.Model.PaymentApi.StoredCredentials;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.StoredCredentials;
 

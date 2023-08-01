@@ -1,9 +1,10 @@
-using PaymentGatewayDotnet.Model.PaymentApi.FinancialRequests;
-using PaymentGatewayDotnet.Model.PaymentApi.InstallmentBilling;
-using PaymentGatewayDotnet.Model.PaymentApi.PartialPayments;
-using PaymentGatewayDotnet.Model.PaymentApi.RetailDevises;
-using PaymentGatewayDotnet.Model.PaymentApi.StoredCredentials;
-using PaymentGatewayDotnet.Model.Shared;
+using PaymentGatewayDotnet.Model.PaymentApi;
+using PaymentGatewayDotnet.PaymentApi;
+using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.PaymentApi.Data.RetailDevises;
+using PaymentGatewayDotnet.PaymentApi.Requests;
+using PaymentGatewayDotnet.Shared;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.PaymentApi.FinancialRequests;
 

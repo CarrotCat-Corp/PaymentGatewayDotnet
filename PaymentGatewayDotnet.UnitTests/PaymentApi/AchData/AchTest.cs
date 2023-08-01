@@ -1,4 +1,5 @@
-using PaymentGatewayDotnet.Model.PaymentApi.AchData;
+using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.PaymentApi.AchData;
 

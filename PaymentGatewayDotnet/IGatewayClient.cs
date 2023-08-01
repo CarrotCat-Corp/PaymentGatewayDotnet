@@ -1,9 +1,7 @@
-using System;
 using System.Threading.Tasks;
-using PaymentGatewayDotnet.Model;
-using PaymentGatewayDotnet.Model.PaymentApi;
-using PaymentGatewayDotnet.Model.PaymentApi.PaymentApiResponseModel;
-using PaymentGatewayDotnet.Model.QueryApi;
+using PaymentGatewayDotnet.Contracts;
+using PaymentGatewayDotnet.PaymentApi.Response;
+using PaymentGatewayDotnet.QueryApi;
 
 namespace PaymentGatewayDotnet
 {
@@ -30,5 +28,15 @@ namespace PaymentGatewayDotnet
         /// <param name="request">IQueryApiRequest Object. I.E. QueryApiRequest</param>
         /// <returns>QueryApiResponse object </returns>
         Task<QueryApiResponse> QueryApiPost(IQueryApiRequest request);
+        
+        /// <summary>
+        /// Implementation of Query API's receipt request.
+        ///
+        /// <br/>
+        /// Refer to gateway documentation for more information
+        /// </summary>
+        /// <param name="request">IQueryApiReceiptRequest Object. I.E. QueryApiReceiptRequest</param>
+        /// <returns>String representation of HTML receipt</returns>
+        Task<string> QueryApiGetReceipt(IQueryApiReceiptRequest request);
     }
 }

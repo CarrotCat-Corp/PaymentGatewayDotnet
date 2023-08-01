@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using PaymentGatewayDotnet.Model.PaymentApi.AchData;
-using PaymentGatewayDotnet.Model.Shared;
+using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.Shared;
 

@@ -1,6 +1,7 @@
 using System.Xml.Linq;
 using NUnit.Framework;
-using PaymentGatewayDotnet.Model.QueryApi;
+using PaymentGatewayDotnet.QueryApi.Data;
+using PaymentGatewayDotnet.QueryApi.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.PaymentApi.AchData;
 

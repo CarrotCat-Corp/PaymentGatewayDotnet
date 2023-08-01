@@ -1,4 +1,5 @@
-using PaymentGatewayDotnet.Model.PaymentApi.PartialPayments;
+using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.PaymentApi.PartialPayments;
 

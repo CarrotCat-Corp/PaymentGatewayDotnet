@@ -1,5 +1,7 @@
+using PaymentGatewayDotnet.Exceptions;
 using PaymentGatewayDotnet.Model;
-using PaymentGatewayDotnet.Model.PaymentApi.StoredCredentials;
+using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.UnitTests.StoredCredentials;
 
