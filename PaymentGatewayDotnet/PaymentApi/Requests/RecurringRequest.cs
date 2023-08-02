@@ -19,8 +19,9 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
 
         public Billing Billing { get; set; }
 
-        public RecurringRequest(string securityKey) : base(securityKey)
+        public RecurringRequest(string securityKey, RecurringAction action) : base(securityKey)
         {
+            Action = action;
         }
 
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()
@@ -33,8 +34,8 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
             if (CurrentPlanId != null) list.Add(new KeyValuePair<string, string>("current_plan_id", CurrentPlanId));
             if (Billing != null) list.AddRange(Billing.ToKeyValuePairs());
 
-            list.AddRange(Plan.ToKeyValuePairs());
-            list.AddRange(Subscription.ToKeyValuePairs());
+            if (Plan != null) list.AddRange(Plan.ToKeyValuePairs());
+            if (Subscription != null) list.AddRange(Subscription.ToKeyValuePairs());
 
             return list;
         }

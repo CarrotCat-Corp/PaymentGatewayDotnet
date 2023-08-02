@@ -66,6 +66,8 @@ namespace PaymentGatewayDotnet.Shared
         /// </summary>
         public Shipping Shipping { get; set; }
         public Billing Billing { get; set; }
+        
+        public Order Order { get; set; }
 
         public string Status { get; private set; }
         public decimal? PaymentsApplied { get; private set; }
@@ -104,7 +106,7 @@ namespace PaymentGatewayDotnet.Shared
 
             if (Shipping != null) list.AddRange(Shipping.ToKeyValuePairs());
             if (Billing != null) list.AddRange(Billing.ToKeyValuePairs());
-
+            if (Order != null) list.AddRange(Order.ToKeyValuePairs());
             return list;
         }
         

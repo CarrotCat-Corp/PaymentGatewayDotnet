@@ -19,7 +19,7 @@ public class GatewayClientTests
     [Test]
     public async Task PaymentApiPost_TransactionWithValidCardCvvAndAvs_TransactionIsApprovedCvvAvsValidated()
     {
-        var request = new FinancialRequest(SecurityKey, FinancialRequestType.Sale)
+        var request = new TransactionRequest(SecurityKey, TransactionType.Sale)
         {
             PaymentCredentials = new PaymentCredentials()
             {
@@ -49,7 +49,7 @@ public class GatewayClientTests
     [Test]
     public async Task PaymentApiPost_TransactionWithAmountLessThan1_TransactionIsDeclinedAvsAndCvvNoMatch()
     { 
-        var request = new FinancialRequest(SecurityKey, FinancialRequestType.Sale)
+        var request = new TransactionRequest(SecurityKey, TransactionType.Sale)
         {
             PaymentCredentials = new PaymentCredentials()
             {

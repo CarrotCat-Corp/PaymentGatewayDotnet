@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using PaymentGatewayDotnet.PaymentApi;
+using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.Shared;
 
 namespace PaymentGatewayDotnet.UnitTests.Shared;

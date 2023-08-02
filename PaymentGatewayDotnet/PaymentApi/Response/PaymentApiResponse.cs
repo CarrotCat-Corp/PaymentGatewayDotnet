@@ -74,7 +74,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Response
         public string AvsResponse => ResultCodes.GetAvsResponseString(RawAvsResponse);
         public string CvvResponse => ResultCodes.GetCvvResponseString(RawCvvResponse);
 
-        public PaymentApiResponse(
+        private PaymentApiResponse(
             byte? rawResponse = null,
             string responseText = null,
             string authCode = null,

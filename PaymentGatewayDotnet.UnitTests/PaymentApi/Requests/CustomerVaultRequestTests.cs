@@ -3,7 +3,7 @@ using PaymentGatewayDotnet.PaymentApi.Requests;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.CustomerVaultRequests;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Requests;
 
 [TestFixture]
 public class CustomerVaultRequestTests
@@ -11,7 +11,7 @@ public class CustomerVaultRequestTests
         [Test]
         public void ToString_ObjectCreated_ValidKeyValidPairs()
     {
-        var data = new CustomerVaultRequest("123abc")
+        var data = new CustomerVaultRequest("123abc", CustomerVaultAction.AddCustomer)
         {
             Order = new Order(){Id = "abc", Description = "abc"},
             Billing = new Billing()
@@ -38,7 +38,6 @@ public class CustomerVaultRequestTests
             ProcessorId = "abc",
             MerchantDefinedFields = new List<MerchantDefinedField>(){new (1, "abc")},
             Action = CustomerVaultAction.AddCustomer,
-            BillingId = "abc",
             SourceTransactionId = "abc",
             AutomaticCardUpdaterEnabled = true,
             Payment = PaymentType.CreditCard,

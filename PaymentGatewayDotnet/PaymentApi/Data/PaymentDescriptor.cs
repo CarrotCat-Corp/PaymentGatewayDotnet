@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PaymentGatewayDotnet.PaymentApi
+namespace PaymentGatewayDotnet.PaymentApi.Data
 {
     /// <summary>
     /// Payment Descriptor Data

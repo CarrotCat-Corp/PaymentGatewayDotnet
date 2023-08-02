@@ -1,4 +1,3 @@
-using PaymentGatewayDotnet.Model.PaymentApi;
 using PaymentGatewayDotnet.PaymentApi;
 using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.PaymentApi.Data.RetailDevises;
@@ -6,15 +5,15 @@ using PaymentGatewayDotnet.PaymentApi.Requests;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.FinancialRequests;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Requests;
 
 [TestFixture]
-public class FinancialRequestTests
+public class TransactionRequestTests
 {
     [Test]
     public void ToKeyValuePairs_GivenObject_GeneratesValidRequest()
     {
-        var request = new FinancialRequest("123", FinancialRequestType.Sale)
+        var request = new TransactionRequest("123", TransactionType.Sale)
         {
             Order = new Order
             {
@@ -78,7 +77,7 @@ public class FinancialRequestTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("security_key", "abc")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("security_key", "123")));
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("orderid", "abc")));
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("item_product_code_1", "abc")));
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("company", "abc")));

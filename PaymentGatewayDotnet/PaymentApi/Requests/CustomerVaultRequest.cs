@@ -8,8 +8,9 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
 {
     public class CustomerVaultRequest : PaymentApiRequest, IPaymentApiRequest
     {
-        public CustomerVaultRequest(string securityKey) : base(securityKey)
+        public CustomerVaultRequest(string securityKey, CustomerVaultAction action) : base(securityKey)
         {
+            Action = action;
         }
 
         /// <summary>
@@ -22,12 +23,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         /// Specifies a Customer Vault id. If not set, the payment gateway will randomly generate a Customer Vault id.
         /// </summary>
         public string CustomerVaultId { get; set; }
-
-
-        /// <summary>
-        /// Billing id to be assigned or updated. If none is provided, one will be created or the billing id with priority '1' will be updated.
-        /// </summary>
-        public string BillingId { get; set; }
+        
 
         /// <summary>
         /// Specifies a payment gateway transaction id in order to associate payment information with a Subscription or Customer Vault record. Must be set with a 'recurring' or 'customer_vault' action.
@@ -39,15 +35,20 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         /// </summary>
         public bool AutomaticCardUpdaterEnabled { get; set; }
 
+        public string Currency { get; set; }
+
         /// <summary>
         /// The type of payment
         /// </summary>
         public PaymentType Payment { get; set; }
+        
+        public Billing Billing { get; set; }
 
         /// <summary>
         /// Shipping Information
         /// </summary>
         public Shipping Shipping { get; set; }
+        public Order Order { get; set; }
 
         /// <summary>
         /// Payment Credentials
@@ -66,11 +67,10 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
 
             list.AddRange(base.ToKeyValuePairs());
 
-            if (CustomerVaultId != null)
-                list.Add(new KeyValuePair<string, string>("customer_vault_id", CustomerVaultId));
+            if (CustomerVaultId != null) list.Add(new KeyValuePair<string, string>("customer_vault_id", CustomerVaultId));
+            if (Currency != null) list.Add(new KeyValuePair<string, string>("currency", Currency));
             if (Action != null)
                 list.Add(new KeyValuePair<string, string>("customer_vault", CustomerVaultActionUtils.ToString(Action)));
-            if (BillingId != null) list.Add(new KeyValuePair<string, string>("customer_vault", BillingId));
             if (SourceTransactionId != null)
                 list.Add(new KeyValuePair<string, string>("source_transaction_id", SourceTransactionId));
             if (AutomaticCardUpdaterEnabled != null)
@@ -80,6 +80,8 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
                 list.Add(new KeyValuePair<string, string>("payment", PaymentTypeUtils.ToString(Payment)));
 
             list.AddRange(Shipping.ToKeyValuePairs());
+            if (Billing != null) list.AddRange(Billing.ToKeyValuePairs());
+            if (Order != null) list.AddRange(Order.ToKeyValuePairs());
             list.AddRange(PaymentCredentials.ToKeyValuePairs());
             list.AddRange(StoredCredentialsIndicatorParameters.ToKeyValuePairs());
 

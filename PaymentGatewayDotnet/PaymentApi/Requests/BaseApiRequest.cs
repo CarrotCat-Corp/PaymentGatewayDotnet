@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace PaymentGatewayDotnet.PaymentApi.Requests
@@ -22,6 +23,11 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         /// If set to "true" and providing one of the test credit card numbers, the single transaction will process in test mode. To see this transaction in reporting, you will need to toggle your account to test mode, but the Payment API testing can be done without doing this. 
         /// </summary>
         public bool? TestMode { get; set; }
+        
+        public BaseApiRequest(string securityKey)
+        {
+            SecurityKey = securityKey ?? throw new ArgumentNullException(nameof(securityKey));
+        }
         
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()
         {

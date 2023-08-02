@@ -7,9 +7,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
 {
     public class PaymentApiRequest : BaseApiRequest
     {
-        public Order Order { get; set; }
         
-
         /// <summary>
         /// If using Multiple MIDs, route to this processor (processor_id is obtained under Settings → Transaction Routing in the Control Panel).
         /// </summary>
@@ -23,10 +21,8 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
 
 
 
-        public PaymentApiRequest(string securityKey)
-        {
-            SecurityKey = securityKey ?? throw new ArgumentNullException(nameof(securityKey));
-        }
+        public PaymentApiRequest(string securityKey) : base(securityKey){}
+
 
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()
         {
@@ -34,7 +30,6 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
             list.AddRange(base.ToKeyValuePairs());
 
             if (ProcessorId != null) list.Add(new KeyValuePair<string, string>("processor_id", ProcessorId));
-            if (Order != null) list.AddRange(Order.ToKeyValuePairs());
 
             if (MerchantDefinedFields is null || MerchantDefinedFields.Count <= 0) return list;
             list.AddRange(MerchantDefinedFields.Select(mdf => mdf.ToKeyValuePair()));

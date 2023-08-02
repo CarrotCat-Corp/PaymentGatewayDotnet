@@ -20,8 +20,4 @@
       <ProjectReference Include="..\PaymentGatewayDotnet\PaymentGatewayDotnet.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="PaymentApi\" />
-    </ItemGroup>
-
 </Project>

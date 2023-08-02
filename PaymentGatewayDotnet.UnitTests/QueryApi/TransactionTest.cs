@@ -1,9 +1,8 @@
 using System.Xml.Linq;
-using NUnit.Framework;
 using PaymentGatewayDotnet.QueryApi.Data;
 using PaymentGatewayDotnet.QueryApi.Enums;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.AchData;
+namespace PaymentGatewayDotnet.UnitTests.QueryApi;
 
 [TestFixture]
 public class TransactionTest

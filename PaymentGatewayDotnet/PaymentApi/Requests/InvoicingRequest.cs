@@ -15,8 +15,9 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         public Invoice Invoice { get; set; }
 
 
-        public InvoicingRequest(string securityKey) : base(securityKey)
+        public InvoicingRequest(string securityKey, InvoicingRequestType type) : base(securityKey)
         {
+            Type = type;
         }
 
 

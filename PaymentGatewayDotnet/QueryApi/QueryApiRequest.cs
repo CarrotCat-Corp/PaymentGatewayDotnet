@@ -23,7 +23,7 @@ namespace PaymentGatewayDotnet.QueryApi
         public PaymentType? TransactionType { get; set; }
 
 
-        public IEnumerable<FinancialRequestType> ActionTypes { get; set; }
+        public IEnumerable<TransactionType> ActionTypes { get; set; }
 
         /// <summary>
         /// Retrieves only transactions with a particular 'transaction source'. A combination of the values can be used and should be separated by commas. For example, to retrieve all transactions with api or recurring actions, use the following
@@ -122,7 +122,7 @@ namespace PaymentGatewayDotnet.QueryApi
             var list = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("security_key", SecurityKey) };
 
             if (Conditions != null && Conditions.Any()) list.Add(new KeyValuePair<string, string>("condition", string.Join(",",Conditions.Select(a=>ConditionUtils.ToString(a)))));
-            if (TransactionType != null) list.Add(new KeyValuePair<string, string>("transaction_type", PaymentTypeUtils.ToString(TransactionType)));
+            if (TransactionType != null) list.Add(new KeyValuePair<string, string>("transaction_type", PaymentTypeUtils.ToShortString(TransactionType)));
             if (ActionTypes != null && ActionTypes.Any()) list.Add(new KeyValuePair<string, string>("action_type", string.Join(",",ActionTypes.Select(a=>FinancialRequestTypeUtils.ToString(a)))));
             if (Sources != null && Sources.Any()) list.Add(new KeyValuePair<string, string>("source", string.Join(",",Sources.Select(a=>SourceUtils.ToString(a)))));
             if (TransactionIds != null && TransactionIds.Any()) list.Add(new KeyValuePair<string, string>("transaction_id", string.Join(",",TransactionIds)));
@@ -131,7 +131,7 @@ namespace PaymentGatewayDotnet.QueryApi
             if (PartialPaymentId != null) list.Add(new KeyValuePair<string, string>("partial_payment_id", PartialPaymentId));
             if (OrderId != null) list.Add(new KeyValuePair<string, string>("order_id", OrderId));
             if (FirstName != null) list.Add(new KeyValuePair<string, string>("first_name", FirstName));
-            if (LastName != null) list.Add(new KeyValuePair<string, string>("first_name", LastName));
+            if (LastName != null) list.Add(new KeyValuePair<string, string>("last_name", LastName));
             if (Address1 != null) list.Add(new KeyValuePair<string, string>("address1", Address1));
             if (City != null) list.Add(new KeyValuePair<string, string>("city", City));
             if (State != null) list.Add(new KeyValuePair<string, string>("state", State));

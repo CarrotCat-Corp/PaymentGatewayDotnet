@@ -61,8 +61,8 @@ namespace PaymentGatewayDotnet.Shared
             if (Id != null) list.Add(new KeyValuePair<string, string>("subscription_id", Id));
             if (PlanId != null) list.Add(new KeyValuePair<string, string>("plan_id", PlanId));
             if (StartDate != null) list.Add(new KeyValuePair<string, string>("start_date", StartDate?.ToString("yyyyMMdd")));
-            if (CustomerReceipt != null) list.Add(new KeyValuePair<string, string>("customer_receipt", CustomerReceipt.ToString()));
-            if (SourceTransactionId != null) list.Add(new KeyValuePair<string, string>("customer_receipt", SourceTransactionId));
+            if (CustomerReceipt != null) list.Add(new KeyValuePair<string, string>("customer_receipt", CustomerReceipt.ToString().ToLower()));
+            if (SourceTransactionId != null) list.Add(new KeyValuePair<string, string>("source_transaction_id", SourceTransactionId));
             
             if (PaymentCredentials != null) list.AddRange(PaymentCredentials.ToKeyValuePairs());
 

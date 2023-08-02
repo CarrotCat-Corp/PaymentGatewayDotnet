@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 

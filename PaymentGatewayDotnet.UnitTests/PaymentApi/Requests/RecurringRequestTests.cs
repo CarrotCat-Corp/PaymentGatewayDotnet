@@ -3,7 +3,7 @@ using PaymentGatewayDotnet.PaymentApi.Requests;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.RecurringRequests;
+namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Requests;
 
 [TestFixture]
 public class RecurringRequestTests
@@ -11,9 +11,8 @@ public class RecurringRequestTests
     [Test]
     public void ToString_PlanObjectCreated_ValidKeyValidPairs()
     {
-        var data = new RecurringRequest("abc")
+        var data = new RecurringRequest("abc", RecurringAction.AddPlan)
         {
-            Action = RecurringAction.AddPlan,
             CurrentPlanId = "abc",
             
             Plan = new RecurringPlan()
@@ -48,7 +47,7 @@ public class RecurringRequestTests
     [Test]
     public void ToString_SubscriptionObjectCreated_ValidKeyValidPairs()
     {
-        var data = new RecurringRequest("abc")
+        var data = new RecurringRequest("abc",RecurringAction.AddSubscription)
         {
             Action = RecurringAction.AddSubscription,
             Subscription = new RecurringSubscription

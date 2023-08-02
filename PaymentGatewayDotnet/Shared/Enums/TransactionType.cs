@@ -1,6 +1,6 @@
 namespace PaymentGatewayDotnet.Shared.Enums
 {
-    public enum FinancialRequestType
+    public enum TransactionType
     {
         Undefined,
         Sale,
@@ -24,55 +24,55 @@ namespace PaymentGatewayDotnet.Shared.Enums
         /// </summary>
         /// <param name="transactionType">String to be parsed</param>
         /// <returns>Enum value of FinancialRequestType</returns>
-        public static FinancialRequestType ParseString(string transactionType)
+        public static TransactionType ParseString(string transactionType)
         {
             switch (transactionType?.ToLower())
             {
                 case "sale":
-                    return FinancialRequestType.Sale;
+                    return TransactionType.Sale;
                 case "auth":
-                    return FinancialRequestType.Auth;
+                    return TransactionType.Auth;
                 case "credit":
-                    return FinancialRequestType.Credit;
+                    return TransactionType.Credit;
                 case "validate":
-                    return FinancialRequestType.Validate;
+                    return TransactionType.Validate;
                 case "offline":
-                    return FinancialRequestType.Offline;
+                    return TransactionType.Offline;
                 case "refund":
-                    return FinancialRequestType.Refund;
+                    return TransactionType.Refund;
                 case "capture":
-                    return FinancialRequestType.Capture;
+                    return TransactionType.Capture;
                 case "void":
-                    return FinancialRequestType.Void;
+                    return TransactionType.Void;
                 // case "return":
                 //     return FinancialRequestType.Return;
                 case "complete_partial_payment":
-                    return FinancialRequestType.CompletePartialPayment;
+                    return TransactionType.CompletePartialPayment;
                 default:
-                    return FinancialRequestType.Undefined;
+                    return TransactionType.Undefined;
             }
         }
 
 
-        public static string ToString(FinancialRequestType? type)
+        public static string ToString(TransactionType? type)
         {
             switch (type)
             {
-                case FinancialRequestType.Sale:
+                case TransactionType.Sale:
                     return "sale";
-                case FinancialRequestType.Auth:
+                case TransactionType.Auth:
                     return "auth";
-                case FinancialRequestType.Credit:
+                case TransactionType.Credit:
                     return "credit";
-                case FinancialRequestType.Validate:
+                case TransactionType.Validate:
                     return "validate";
-                case FinancialRequestType.Offline:
+                case TransactionType.Offline:
                     return "offline";
-                case FinancialRequestType.Refund:
+                case TransactionType.Refund:
                     return "refund";
-                case FinancialRequestType.Capture:
+                case TransactionType.Capture:
                     return "capture";
-                case FinancialRequestType.Void:
+                case TransactionType.Void:
                     return "void";
                 // case FinancialRequestType.Return:
                 //     return "return";
@@ -80,7 +80,7 @@ namespace PaymentGatewayDotnet.Shared.Enums
                 // case null:
                 // case FinancialRequestType.Undefined:
                 // case FinancialRequestType.Update:
-                case FinancialRequestType.CompletePartialPayment: return "complete_partial_payment";
+                case TransactionType.CompletePartialPayment: return "complete_partial_payment";
                 default:
                     return "";
             }
