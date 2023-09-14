@@ -212,3 +212,6 @@ ChatGPT - Helping me to save some time with especially tedious unit tests.
 
 - Reworked project structure for better readability
 - Added support for QueryApi
+
+### v1.0.2
+- Added some missing parameters
