@@ -133,6 +133,8 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         
         public Order Order { get; set; }
 
+        public VoidReasonType? VoidReason { get; set; }
+
 
         public TransactionRequest(string securityKey, TransactionType type) : base(securityKey)
         {
@@ -181,6 +183,8 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
             if (Order != null) list.AddRange(Order.ToKeyValuePairs());
             if (CustomerReceipt != null)
                 list.Add(new KeyValuePair<string, string>("customer_receipt", CustomerReceipt.ToString().ToLower()));
+            if (VoidReason != null) list.Add(new KeyValuePair<string, string>("void_reason", VoidReasonTypeUtils.ToString(VoidReason)));
+
 
             return list;
         }

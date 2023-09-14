@@ -31,6 +31,14 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
         /// </summary>
         public CreditCard CreditCard { get; set; }
 
+        /// <summary>
+        /// Original payment gateway transaction id.
+        /// <br/>
+        /// This parameter is used in void, refunds, adjustment transactions, and other transactions tied to an original transaction.
+        /// You cannot use this ID to make additional sale or authorization.
+        /// </summary>
+        public string TransactionId { get; set; }
+
         public PaymentType? PaymentType { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()
@@ -42,6 +50,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (ApplePayToken != null) list.Add(new KeyValuePair<string, string>("applepay_payment_data", ApplePayToken));
             if (Ach != null) list.AddRange(Ach.ToKeyValuePairs());
             if (CreditCard != null) list.AddRange(CreditCard.ToKeyValuePairs());
+            if (TransactionId != null) list.Add(new KeyValuePair<string, string>("transactionid", TransactionId));
             if (PaymentType != null) list.Add(new KeyValuePair<string, string>("payment", PaymentTypeUtils.ToString(PaymentType)));
 
             return list;

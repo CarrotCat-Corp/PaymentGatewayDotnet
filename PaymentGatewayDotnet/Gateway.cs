@@ -26,7 +26,7 @@ namespace PaymentGatewayDotnet
         public static async Task<PaymentApiResponse> PaymentApiPost(IPaymentApiRequest request, Uri uri = null)
         {
             if (uri == null) uri = new Uri("https://secure.nmi.com/api/transact.php");
-            
+
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = uri;

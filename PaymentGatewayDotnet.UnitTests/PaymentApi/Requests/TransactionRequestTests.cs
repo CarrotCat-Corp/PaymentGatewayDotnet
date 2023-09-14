@@ -37,7 +37,7 @@ public class TransactionRequestTests
             Currency = "CAD",
             IpAddress = "999.999.999.999",
             ProcessorId = "abc",
-            MerchantDefinedFields = new List<MerchantDefinedField>(){new (5, "abc"), new(20, "abc")},
+            MerchantDefinedFields = new List<MerchantDefinedField>() { new(5, "abc"), new(20, "abc") },
             TestMode = true,
             PaymentCredentials = new PaymentCredentials
             {
@@ -50,16 +50,18 @@ public class TransactionRequestTests
             CashDiscount = decimal.One,
             Kount = new Kount { TransactionSessionId = "abc" },
             PaymentDescriptor = new PaymentDescriptor { Descriptor = "abc" },
-            StoredCredentialsIndicatorParameters = new StoredCredentialsIndicatorParameters { InitialTransactionId = "abc" },
+            StoredCredentialsIndicatorParameters = new StoredCredentialsIndicatorParameters
+                { InitialTransactionId = "abc" },
             SignatureImage = "abc",
             PinlessDebitOverride = true,
             DuplicateSeconds = 1,
             InstallmentBilling = new InstallmentBillingData { Method = InstallmentBillingMethod.Recurring },
             AuthorizationCode = "abc",
-            ThreeDSecure = new ThreeDSecure { Cavv = "abc"},
-            DriversLicence = new DriversLicense(){Number = "abc", DateOfBirth = new DateTime(2000,01,01), State = "abc"},
+            ThreeDSecure = new ThreeDSecure { Cavv = "abc" },
+            DriversLicence = new DriversLicense()
+                { Number = "abc", DateOfBirth = new DateTime(2000, 01, 01), State = "abc" },
             PartialPayment = new PartialPayment { PartialPaymentType = PartialPaymentType.SettlePartial },
-            PaymentFacilitator = new PaymentFacilitator(){Id = "abc"},
+            PaymentFacilitator = new PaymentFacilitator() { Id = "abc" },
             RetailData = new CardDeviceData
             {
                 UnencryptedRetailMagneticStripeData = new UnencryptedRetailMagneticStripeData { Track1 = "abc" }
@@ -69,7 +71,7 @@ public class TransactionRequestTests
             Shipping = new Shipping
             {
                 FirstName = "abc",
-                Address = new Address() { Address1 = "abc"}
+                Address = new Address() { Address1 = "abc" }
             }
         };
 
@@ -113,4 +115,29 @@ public class TransactionRequestTests
         });
     }
 
+    [Test]
+    public void ToKeyValuePairs_GivenVoidObject_GeneratesValidRequest()
+    {
+        var request = new TransactionRequest("123", TransactionType.Void)
+        {
+            TestMode = true,
+            PaymentCredentials = new PaymentCredentials
+            {
+                TransactionId = "abc",
+            },
+            VoidReason = VoidReasonType.Fraud,
+            Payment = PaymentType.Cash,
+        };
+
+        var result = request.ToKeyValuePairs().ToList();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("security_key", "123")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("type", "void")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("transactionid", "abc")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("void_reason", "fraud")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("payment", "cash")));
+        });
+    }
 }
