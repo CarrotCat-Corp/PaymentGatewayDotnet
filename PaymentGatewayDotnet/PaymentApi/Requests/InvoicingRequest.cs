@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using PaymentGatewayDotnet.Abstractions;
 using PaymentGatewayDotnet.Contracts;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.PaymentApi.Requests
 {
-    public class InvoicingRequest : PaymentApiRequest, IPaymentApiRequest
+    public class InvoicingRequest : BasePaymentApiRequest, IPaymentApiRequest
     {
         /// <summary>
         /// Type of invoicing request

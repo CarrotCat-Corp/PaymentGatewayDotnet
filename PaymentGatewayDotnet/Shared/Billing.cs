@@ -51,6 +51,12 @@ namespace PaymentGatewayDotnet.Shared
         public string Email { get; set; }
         
         /// <summary>
+        /// If set to true, when the customer is charged, they will be sent a transaction receipt.
+        /// This will only work if billing email is entered
+        /// </summary>
+        public bool? CustomerReceipt { get; set; }
+        
+        /// <summary>
         /// Card billing address
         /// Required for Address Verification Service
         /// </summary>
@@ -92,6 +98,31 @@ namespace PaymentGatewayDotnet.Shared
                 Address = Address.FromXmlElement(element)
             };
             return billing;
+        }
+        
+        public XElement ToXmlElement()
+        {
+
+            var element = new XElement("billing");
+
+            if (Id != null) element.Add(new XElement("billing-id", Id));
+            if (FirstName != null) element.Add(new XElement("first-name", FirstName));
+            if (LastName != null) element.Add(new XElement("last-name", LastName));
+            if (Company != null) element.Add(new XElement("company", Company));
+            if (Phone != null) element.Add(new XElement("phone", Phone));
+            if (Fax != null) element.Add(new XElement("fax", Fax));
+            if (Email != null) element.Add(new XElement("email", Email));
+            if (CellPhone != null) element.Add(new XElement("cell-phone", CellPhone));
+
+            if (Address == null) return element;
+            
+            var addressElements = Address.ToXmlElements();
+            foreach (var el in addressElements)
+            {
+                element.Add(el);
+            }
+
+            return element;
         }
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using PaymentGatewayDotnet.Utilities;
 
@@ -10,6 +12,11 @@ namespace PaymentGatewayDotnet.Shared
         /// Order ID. This can be used to hold invoice ID
         /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// Purchase order date. Defaults to the date of the transaction.
+        /// </summary>
+        public DateTime? OrderDate { get; set; }
 
         /// <summary>
         /// Order description
@@ -39,7 +46,7 @@ namespace PaymentGatewayDotnet.Shared
         public string VatInvoiceReferenceNumber { get; set; }
         public string AlternateTaxId { get; set; }
         public decimal? AlternateTaxAmount { get; set; }
-        public IList<Item> Items { get; set; }
+        public IEnumerable<Item> Items { get; set; }
 
 
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()
@@ -51,40 +58,115 @@ namespace PaymentGatewayDotnet.Shared
             if (TemplateId != null) list.Add(new KeyValuePair<string, string>("order_template", TemplateId));
             if (PoNumber != null) list.Add(new KeyValuePair<string, string>("ponumber", PoNumber));
             if (TaxAmount != null) list.Add(new KeyValuePair<string, string>("tax", TaxAmount?.ToString("F2")));
-            if (DiscountAmount != null) list.Add(new KeyValuePair<string, string>("discount_amount", DiscountAmount?.ToString("F2")));
-            if (SummaryCommodityCode != null) list.Add(new KeyValuePair<string, string>("summary_commodity_code", SummaryCommodityCode));
-            if (DutyAmount != null) list.Add(new KeyValuePair<string, string>("duty_amount", DutyAmount?.ToString("F2")));
-            if (NationalTaxAmount != null) list.Add(new KeyValuePair<string, string>("national_tax_amount", NationalTaxAmount?.ToString("F2")));
-            if (VatTaxAmount != null) list.Add(new KeyValuePair<string, string>("vat_tax_amount", VatTaxAmount?.ToString("F2")));
-            if (VatTaxRate != null) list.Add(new KeyValuePair<string, string>("vat_tax_rate", VatTaxRate?.ToString("F2")));
-            if (MerchantVatRegistration != null) list.Add(new KeyValuePair<string, string>("merchant_vat_registration", MerchantVatRegistration));
-            if (CustomerVatRegistration != null) list.Add(new KeyValuePair<string, string>("customer_vat_registration", CustomerVatRegistration));
-            if (VatInvoiceReferenceNumber != null)list.Add(new KeyValuePair<string, string>("vat_invoice_reference_number", VatInvoiceReferenceNumber));
+            if (DiscountAmount != null)
+                list.Add(new KeyValuePair<string, string>("discount_amount", DiscountAmount?.ToString("F2")));
+            if (SummaryCommodityCode != null)
+                list.Add(new KeyValuePair<string, string>("summary_commodity_code", SummaryCommodityCode));
+            if (DutyAmount != null)
+                list.Add(new KeyValuePair<string, string>("duty_amount", DutyAmount?.ToString("F2")));
+            if (NationalTaxAmount != null)
+                list.Add(new KeyValuePair<string, string>("national_tax_amount", NationalTaxAmount?.ToString("F2")));
+            if (VatTaxAmount != null)
+                list.Add(new KeyValuePair<string, string>("vat_tax_amount", VatTaxAmount?.ToString("F2")));
+            if (VatTaxRate != null)
+                list.Add(new KeyValuePair<string, string>("vat_tax_rate", VatTaxRate?.ToString("F2")));
+            if (MerchantVatRegistration != null)
+                list.Add(new KeyValuePair<string, string>("merchant_vat_registration", MerchantVatRegistration));
+            if (CustomerVatRegistration != null)
+                list.Add(new KeyValuePair<string, string>("customer_vat_registration", CustomerVatRegistration));
+            if (VatInvoiceReferenceNumber != null)
+                list.Add(new KeyValuePair<string, string>("vat_invoice_reference_number", VatInvoiceReferenceNumber));
             if (AlternateTaxId != null) list.Add(new KeyValuePair<string, string>("alternate_tax_id", AlternateTaxId));
-            if (AlternateTaxAmount != null) list.Add(new KeyValuePair<string, string>("alternate_tax_amount", AlternateTaxAmount?.ToString("F2")));
-
-            if (Items is null || Items.Count <= 0) return list;
-
-            for (var i = 0; i < Items.Count; i++)
+            if (AlternateTaxAmount != null)
+                list.Add(new KeyValuePair<string, string>("alternate_tax_amount", AlternateTaxAmount?.ToString("F2")));
+            
+            if (Items?.Any() == true)
             {
-                list.AddRange(Items[i].ToKeyValuePairs(i+1));
+                var i = 0; // starting with 0
+                foreach (var item in Items)
+                {
+                    i++; // adding one before action, so the start index would be 1
+                    list.AddRange(item.ToKeyValuePairs(i));
+                }
             }
-
             return list;
         }
-        
+
         public static Order FromXmlElement(XElement element)
         {
             if (element is null) return null;
-            var order = new Order();
-                
-            order.PoNumber = XmlUtilities.XElementToString(element.Element("ponumber"));
-            order.Id = XmlUtilities.XElementToString(element.Element("orderid"));
-            order.Description = XmlUtilities.XElementToString(element.Element("order_description"));
-            order.TaxAmount = XmlUtilities.XElementToDecimal(element.Element("tax"), "tax");
-            order.CustomerVatRegistration = XmlUtilities.XElementToString(element.Element("customertaxid"), "customertaxid");
-            
+            var order = new Order
+            {
+                PoNumber = XmlUtilities.XElementToString(element.Element("ponumber")),
+                Id = XmlUtilities.XElementToString(element.Element("orderid")),
+                Description = XmlUtilities.XElementToString(element.Element("order_description")),
+                TaxAmount = XmlUtilities.XElementToDecimal(element.Element("tax"), "tax"),
+                CustomerVatRegistration = XmlUtilities.XElementToString(element.Element("customertaxid"), "customertaxid")
+            };
+
             return order;
+        }
+
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (Id != null)
+                yield return new XElement("order-id", Id);
+
+            if (OrderDate != null) 
+                yield return new XElement("order-date", OrderDate?.ToString("YYMMdd"));
+            
+            if (Description != null) 
+                yield return new XElement("order-description", Description);
+            
+            if (TemplateId != null) 
+                yield return new XElement("order-template", TemplateId);
+            
+            if (PoNumber != null) 
+                yield return new XElement("po-number", PoNumber);
+            
+            if (TaxAmount != null) 
+                yield return new XElement("tax-amount", TaxAmount?.ToString("F2"));
+            
+            if (DiscountAmount != null)
+                yield return new XElement("discount-amount", DiscountAmount?.ToString("F2"));
+            
+            if (SummaryCommodityCode != null)
+                yield return new XElement("summary-commodity-code", SummaryCommodityCode);
+            
+            if (DutyAmount != null) 
+                yield return new XElement("duty-amount", DutyAmount?.ToString("F2"));
+            
+            if (NationalTaxAmount != null)
+                yield return new XElement("national-tax-amount", NationalTaxAmount?.ToString("F2"));
+            
+            if (VatTaxAmount != null) 
+                yield return new XElement("vat-tax-amount", VatTaxAmount?.ToString("F2"));
+            
+            if (VatTaxRate != null) 
+                yield return new XElement("vat-tax-rate", VatTaxRate?.ToString("F2"));
+            
+            if (MerchantVatRegistration != null)
+                yield return new XElement("merchant-vat-registration", MerchantVatRegistration);
+            
+            if (CustomerVatRegistration != null)
+                yield return new XElement("customer-vat-registration", CustomerVatRegistration);
+            
+            if (VatInvoiceReferenceNumber != null)
+                yield return new XElement("vat-invoice-reference-number", VatInvoiceReferenceNumber);
+            
+            if (AlternateTaxId != null) 
+                yield return new XElement("alternate-tax-id", AlternateTaxId);
+            
+            if (AlternateTaxAmount != null)
+                yield return new XElement("alternate-tax-amount", AlternateTaxAmount?.ToString("F2"));
+
+            if (Items != null)
+            {
+                foreach (var item in Items)
+                {
+                    yield return item.ToXmlElement();
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PaymentGatewayDotnet.Abstractions;
 using PaymentGatewayDotnet.Contracts;
 using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.Shared;
@@ -6,7 +7,7 @@ using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.PaymentApi.Requests
 {
-    public class CustomerVaultRequest : PaymentApiRequest, IPaymentApiRequest
+    public class CustomerVaultRequest : BasePaymentApiRequest, IPaymentApiRequest
     {
         public CustomerVaultRequest(string securityKey, CustomerVaultAction action) : base(securityKey)
         {

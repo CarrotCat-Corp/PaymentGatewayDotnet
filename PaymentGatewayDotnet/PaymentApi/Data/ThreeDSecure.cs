@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.PaymentApi.Data
 {
@@ -41,11 +44,15 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
         /// <summary>
         /// A number that indicates the result of the attempt to authenticate the cardholder. Values are dependent on the card brand. 
         /// </summary>
-        public string Esi { get; set; }
+        public string Eci { get; set; }
+
+        public bool? IsSkipThreeDs { get; set; }
         
         
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()
         {
+            if (IsSkipThreeDs != null) throw new ArgumentException("Skip 3DS is only available for three-step redirects transactions", nameof(IsSkipThreeDs));
+            
             var list = new List<KeyValuePair<string, string>>();
             
             if (CardholderAuth != null) list.Add(new KeyValuePair<string, string>("cardholder_auth", CardholderAuth));
@@ -53,9 +60,20 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (Xid != null) list.Add(new KeyValuePair<string, string>("xid", Xid));
             if (ThreeDsVersion != null) list.Add(new KeyValuePair<string, string>("three_ds_version", ThreeDsVersion));
             if (DirectoryServerId != null) list.Add(new KeyValuePair<string, string>("directory_server_id", DirectoryServerId));
-            if (Esi != null) list.Add(new KeyValuePair<string, string>("eci", Esi));
+            if (Eci != null) list.Add(new KeyValuePair<string, string>("eci", Eci));
 
             return list;
+        }
+
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (IsSkipThreeDs != null) yield return new XElement("skip-3ds", IsSkipThreeDs);
+            if (CardholderAuth != null) yield return new XElement("cardholder-auth", CardholderAuth);
+            if (Cavv != null) yield return new XElement("cavv", Cavv);
+            if (Xid != null) yield return new XElement("xid", Xid);
+            if (ThreeDsVersion != null) yield return new XElement("three-ds-version", ThreeDsVersion);
+            if (DirectoryServerId != null) yield return new XElement("directory-server-id", DirectoryServerId);
+            if (Eci != null) yield return new XElement("eci", Eci);
         }
     }
 }

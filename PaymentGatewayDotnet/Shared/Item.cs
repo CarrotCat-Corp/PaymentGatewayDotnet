@@ -80,23 +80,20 @@ namespace PaymentGatewayDotnet.Shared
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs(int itemNumber)
         {
             var item = itemNumber.ToString();
-            var list = new List<KeyValuePair<string, string>>();
 
-            if (ProductCode!=null) list.Add(new KeyValuePair<string, string>("item_product_code_"+item, ProductCode));
-            if (Description != null) list.Add(new KeyValuePair<string, string>("item_description_" + item, Description));
-            if (CommodityCode!=null) list.Add(new KeyValuePair<string, string>("item_commodity_code_"+item, CommodityCode));
-            if (UnitOfMeasure!=null) list.Add(new KeyValuePair<string, string>("item_unit_of_measure_"+item, UnitOfMeasure));
-            if (UnitCost!=null) list.Add(new KeyValuePair<string, string>("item_unit_cost_"+item, UnitCost?.ToString("F2")));
-            if (Quantity!=null) list.Add(new KeyValuePair<string, string>("item_quantity_"+item, Quantity?.ToString("F2")));
-            if (TotalAmount!=null) list.Add(new KeyValuePair<string, string>("item_total_amount_"+item, TotalAmount?.ToString("F2")));
-            if (TaxAmount!=null) list.Add(new KeyValuePair<string, string>("item_tax_amount_"+item, TaxAmount?.ToString("F2")));
-            if (TaxRate!=null) list.Add(new KeyValuePair<string, string>("item_tax_rate_"+item, TaxRate?.ToString("F2")));
-            if (DiscountAmount!=null) list.Add(new KeyValuePair<string, string>("item_discount_amount_"+item, DiscountAmount?.ToString("F2")));
-            if (DiscountRate!=null) list.Add(new KeyValuePair<string, string>("item_discount_rate_"+item, DiscountRate?.ToString("F2")));
-            if (TaxType!=null) list.Add(new KeyValuePair<string, string>("item_tax_type_"+item, TaxType));
-            if (AlternateTaxId!=null) list.Add(new KeyValuePair<string, string>("item_alternate_tax_id_"+item, AlternateTaxId));
-
-            return list;
+            if (ProductCode!=null) yield return new KeyValuePair<string, string>("item_product_code_"+item, ProductCode);
+            if (Description != null) yield return new KeyValuePair<string, string>("item_description_" + item, Description);
+            if (CommodityCode!=null) yield return new KeyValuePair<string, string>("item_commodity_code_"+item, CommodityCode);
+            if (UnitOfMeasure!=null) yield return new KeyValuePair<string, string>("item_unit_of_measure_"+item, UnitOfMeasure);
+            if (UnitCost!=null) yield return new KeyValuePair<string, string>("item_unit_cost_"+item, UnitCost?.ToString("F2"));
+            if (Quantity!=null) yield return new KeyValuePair<string, string>("item_quantity_"+item, Quantity?.ToString("F2"));
+            if (TotalAmount!=null) yield return new KeyValuePair<string, string>("item_total_amount_"+item, TotalAmount?.ToString("F2"));
+            if (TaxAmount!=null) yield return new KeyValuePair<string, string>("item_tax_amount_"+item, TaxAmount?.ToString("F2"));
+            if (TaxRate!=null) yield return new KeyValuePair<string, string>("item_tax_rate_"+item, TaxRate?.ToString("F2"));
+            if (DiscountAmount!=null) yield return new KeyValuePair<string, string>("item_discount_amount_"+item, DiscountAmount?.ToString("F2"));
+            if (DiscountRate!=null) yield return new KeyValuePair<string, string>("item_discount_rate_"+item, DiscountRate?.ToString("F2"));
+            if (TaxType!=null) yield return new KeyValuePair<string, string>("item_tax_type_"+item, TaxType);
+            if (AlternateTaxId!=null) yield return new KeyValuePair<string, string>("item_alternate_tax_id_"+item, AlternateTaxId);
         }
         
         public static List<Item> FromXmlElements(IEnumerable<XElement> productElements)
@@ -127,6 +124,27 @@ namespace PaymentGatewayDotnet.Shared
             }
 
             return items;
+        }
+        
+        
+        public XElement ToXmlElement()
+        {
+            var element = new XElement("product");
+            if (ProductCode != null) element.Add(new XElement("product-code", ProductCode));
+            if (Description != null) element.Add(new XElement("description", Description));
+            if (CommodityCode != null) element.Add(new XElement("commodity-code", CommodityCode));
+            if (UnitOfMeasure != null) element.Add(new XElement("unit-of-measure", UnitOfMeasure));
+            if (UnitCost != null) element.Add(new XElement("unit-cost", UnitCost?.ToString("F2")));
+            if (Quantity != null) element.Add(new XElement("quantity", Quantity?.ToString("F2")));
+            if (TotalAmount != null) element.Add(new XElement("total-amount", TotalAmount?.ToString("F2")));
+            if (TaxAmount != null) element.Add(new XElement("tax-amount", TaxAmount?.ToString("F2")));
+            if (TaxRate != null) element.Add(new XElement("tax-rate", TaxRate?.ToString("F2")));
+            if (DiscountAmount != null) element.Add(new XElement("discount-amount", DiscountAmount?.ToString("F2")));
+            if (DiscountRate != null) element.Add(new XElement("discount-rate", DiscountRate?.ToString("F2")));
+            if (TaxType != null) element.Add(new XElement("tax-type", TaxType));
+            if (AlternateTaxId != null) element.Add(new XElement("alternate-tax-id", AlternateTaxId));
+
+            return element;
         }
     }
 }

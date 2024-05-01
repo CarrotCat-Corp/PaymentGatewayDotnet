@@ -1,5 +1,7 @@
 using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.PaymentApi.Requests;
+using PaymentGatewayDotnet.QueryApi;
+using PaymentGatewayDotnet.QueryApi.Enums;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
@@ -71,6 +73,61 @@ public class GatewayClientTests
             Assert.That(result.ResponseText, Is.EqualTo("DECLINE"));
             Assert.That(result.RawAvsResponse, Is.EqualTo("N"));
             Assert.That(result.RawCvvResponse, Is.EqualTo("N"));
+        });
+    }
+    
+    
+    // Query API
+    [Test]
+    public async Task QueryApi_RequestForTransactionsWithSpecificOrder()
+    {
+        var request = new QueryApiRequest("5w3R996A7aKd57Cx7vWaauQUBQr2kdMW")
+        {
+            // Conditions = null,
+            // TransactionType = null,
+            // ActionTypes = null,
+            // Sources = null,
+            // TransactionIds = null,
+            // SubscriptionIds = null,
+            // InvoiceId = "1047",
+            // PartialPaymentId = null,
+            OrderId = "10477",
+            // FirstName = null,
+            // LastName = null,
+            // Address1 = null,
+            // City = null,
+            // State = null,
+            // Zip = null,
+            // Phone = null,
+            // Fax = null,
+            // OrderDescription = null,
+            // DriversLicenseNumber = null,
+            // DriversLicenseDob = null,
+            // DriversLicenseState = null,
+            // Email = null,
+            // CcNumber = null,
+            // MerchantDefinedFields = null,
+            // StartDate = null,
+            // EndDate = null,
+            // ReportType = ,
+            // MobileDeviceLicence = null,
+            // MobileDeviceNickname = null,
+            // CustomerVaultId = null,
+            // DateSearch = null,
+            // ResultLimit = null,
+            // PageNumber = null,
+            ResultOrder = ResultOrder.Reverse,
+            // InvoiceStatuses = null
+        };
+
+        var result = await _gatewayClient.QueryApiPost(request);
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Transactions.Count, Is.EqualTo(1));
+            Assert.That(result.Transactions.Count, Is.EqualTo(0));
+            Assert.That(result.Transactions.Count, Is.AtLeast(1));
+            Assert.That(result.Transactions.Count, Is.AtMost(1));
         });
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.PaymentApi.Data
 {
@@ -74,6 +75,20 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (Url != null) list.Add(new KeyValuePair<string, string>("descriptor_url", Url));
 
             return list;
+        }
+
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (Descriptor != null) yield return new XElement("descriptor", Descriptor);
+            if (Phone != null) yield return new XElement("descriptor-phone", Phone);
+            if (Address != null) yield return new XElement("descriptor-address", Address);
+            if (City != null) yield return new XElement("descriptor-city", City);
+            if (State != null) yield return new XElement("descriptor-state", State);
+            if (Postal != null) yield return new XElement("descriptor-postal", Postal);
+            if (Country != null) yield return new XElement("descriptor-country", Country);
+            if (Mcc != null) yield return new XElement("descriptor-mcc", Mcc);
+            if (MerchantId != null) yield return new XElement("descriptor-merchant_id", MerchantId);
+            if (Url != null) yield return new XElement("descriptor-url", Url);
         }
     }
 }

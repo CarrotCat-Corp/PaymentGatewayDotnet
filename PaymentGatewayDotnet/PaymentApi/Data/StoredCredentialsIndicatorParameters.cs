@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 using PaymentGatewayDotnet.Exceptions;
 using PaymentGatewayDotnet.Shared.Enums;
 
@@ -40,6 +41,13 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (StoredCredentialsIndicator != null) list.Add(new KeyValuePair<string, string>("stored_credential_indicator", StoredCredentialsIndicatorUtils.ToString(StoredCredentialsIndicator)));
 
             return list;
+        }
+
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (InitiatedBy != null) yield return new XElement("initiated-by", InitiatedByUtils.ToString(InitiatedBy));
+            if (InitialTransactionId != null) yield return new XElement("initial-transaction-id", InitialTransactionId);
+            if (StoredCredentialsIndicator != null) yield return new XElement("stored-credential-indicator", StoredCredentialsIndicatorUtils.ToString(StoredCredentialsIndicator));
         }
     }
 }

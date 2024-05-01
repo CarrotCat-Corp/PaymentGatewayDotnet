@@ -7,10 +7,6 @@ namespace PaymentGatewayDotnet.Shared
 {
     public sealed class Shipping
     {
-        /// <summary>
-        /// In Customer Vault transactions, Billing id to be assigned or updated. I
-        /// f none is provided, one will be created or the billing id with priority '1' will be updated.
-        /// </summary>
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -71,6 +67,39 @@ namespace PaymentGatewayDotnet.Shared
 
             };
             return billing;
+        }
+        
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            yield return ToShippingXmlElement();
+            if (Amount != null) yield return new XElement("shipping-amount", Amount?.ToString("F2"));
+            if (ShipFromPostalCode != null) yield return new XElement("ship-from-postal", ShipFromPostalCode);
+            if (Carrier != null) yield return new XElement("shipping-carrier", ShippingCarrierUtils.ToString(Carrier));
+            if (TrackingNumber != null) yield return new XElement("tracking-number", TrackingNumber);
+        }
+        
+        private XElement ToShippingXmlElement()
+        {
+
+            var element = new XElement("shipping");
+
+            if (Id != null) element.Add(new XElement("shipping-id", Id));
+            if (FirstName != null) element.Add(new XElement("first-name", FirstName));
+            if (LastName != null) element.Add(new XElement("last-name", LastName));
+            if (Company != null) element.Add(new XElement("company", Company));
+            if (Phone != null) element.Add(new XElement("phone", Phone));
+            if (Fax != null) element.Add(new XElement("fax", Fax));
+            if (Email != null) element.Add(new XElement("email", Email));
+
+            if (Address == null) return element;
+            
+            var addressElements = Address.ToXmlElements();
+            foreach (var el in addressElements)
+            {
+                element.Add(el);
+            }
+
+            return element;
         }
     }
 }   

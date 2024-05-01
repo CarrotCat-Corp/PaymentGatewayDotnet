@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using PaymentGatewayDotnet.Abstractions;
 using PaymentGatewayDotnet.Contracts;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.PaymentApi.Requests
 {
-    public class RecurringRequest : PaymentApiRequest, IPaymentApiRequest
+    public class RecurringRequest : BasePaymentApiRequest, IPaymentApiRequest
     {
         public RecurringAction Action { get; set; }
 

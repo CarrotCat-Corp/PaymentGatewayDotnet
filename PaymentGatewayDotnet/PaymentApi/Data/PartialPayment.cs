@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.PaymentApi.Data
@@ -34,6 +35,12 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (CompletePartialPayment) list.Add(new KeyValuePair<string, string>("type", "complete_partial_payment"));
 
             return list;
+        }
+
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (Id != null) yield return new XElement("partial-payment-id", Id);
+            if (PartialPaymentType != null) yield return new XElement("partial-payments", PartialPaymentTypeUtils.ToString(PartialPaymentType)); 
         }
     }
 }

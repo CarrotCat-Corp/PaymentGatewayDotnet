@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.PaymentApi.Data
 {
@@ -55,6 +56,20 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (SubMerchantCountry != null) list.Add(new KeyValuePair<string, string>("submerchant_email", SubMerchantCountry));
 
             return list;
+        }
+
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (string.IsNullOrEmpty(Id)) yield return new XElement("payment-facilitator-id", Id);
+            if (string.IsNullOrEmpty(SubMerchantId)) yield return new XElement("submerchant-id", SubMerchantId);
+            if (string.IsNullOrEmpty(SubMerchantEmail)) yield return new XElement("submerchant-email", SubMerchantEmail);
+            if (string.IsNullOrEmpty(SubMerchantPhone)) yield return new XElement("submerchant-phone", SubMerchantPhone);
+            if (string.IsNullOrEmpty(SubMerchantPostal)) yield return new XElement("submerchant-postal", SubMerchantPostal);
+            if (string.IsNullOrEmpty(SubMerchantName)) yield return new XElement("submerchant-name", SubMerchantName);
+            if (string.IsNullOrEmpty(SubMerchantAddress)) yield return new XElement("submerchant-address", SubMerchantAddress);
+            if (string.IsNullOrEmpty(SubMerchantCity)) yield return new XElement("submerchant-city", SubMerchantCity);
+            if (string.IsNullOrEmpty(SubMerchantState)) yield return new XElement("submerchant-state", SubMerchantState);
+            if (string.IsNullOrEmpty(SubMerchantCountry)) yield return new XElement("submerchant-country", SubMerchantCountry);
         }
     }
 }

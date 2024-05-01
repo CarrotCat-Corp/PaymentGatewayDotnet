@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.PaymentApi.Data
@@ -27,13 +28,16 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
         
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()
         {
-            var list = new List<KeyValuePair<string, string>>();
-            
-            if (Method != null) list.Add(new KeyValuePair<string, string>("billing_method", InstallmentBillingMethodUtils.ToString(Method)));
-            if (Number != null) list.Add(new KeyValuePair<string, string>("billing_number", Number.ToString()));
-            if (Total != null) list.Add(new KeyValuePair<string, string>("billing_total", Total.ToString("F2")));
+            if (Method != null) yield return new KeyValuePair<string, string>("billing_method", InstallmentBillingMethodUtils.ToString(Method));
+            if (Number != null) yield return new KeyValuePair<string, string>("billing_number", Number.ToString());
+            if (Total != null) yield return new KeyValuePair<string, string>("billing_total", Total.ToString("F2"));
+        }
 
-            return list;
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (Method != null) yield return new XElement("billing-method", InstallmentBillingMethodUtils.ToString(Method));
+            if (Number != null) yield return new XElement("billing-number", Number.ToString());
+            if (Total != null) yield return new XElement("billin-total", Total.ToString("F2"));
         }
     }
 }

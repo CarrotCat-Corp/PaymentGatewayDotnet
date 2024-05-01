@@ -11,8 +11,7 @@ namespace PaymentGatewayDotnet.Shared
         public string Address2 { get; set; }
 
         public string City { get; set; }
-
-        //todo: implement enumerable for Province
+        
         /// <summary>
         /// Format: CC
         /// </summary>
@@ -20,7 +19,6 @@ namespace PaymentGatewayDotnet.Shared
 
         public string PostalZip { get; set; }
 
-        //todo: implement enumerable for Country
         /// <summary>
         /// Country codes are as shown in ISO 3166. Format: CC
         /// </summary>
@@ -30,17 +28,13 @@ namespace PaymentGatewayDotnet.Shared
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs(string prefix = null)
         {
             if (prefix != null && !prefix.EndsWith("_")) prefix = prefix + "_";
-
-            var list = new List<KeyValuePair<string, string>>();
-
-            if (Address1 != null) list.Add(new KeyValuePair<string, string>(prefix+"address1", Address1));
-            if (Address2 != null) list.Add(new KeyValuePair<string, string>(prefix+"address2", Address2));
-            if (City != null) list.Add(new KeyValuePair<string, string>(prefix+"city", City));
-            if (StateProvince != null) list.Add(new KeyValuePair<string, string>(prefix+"state", StateProvince));
-            if (PostalZip != null) list.Add(new KeyValuePair<string, string>(prefix+"zip", PostalZip));
-            if (Country != null) list.Add(new KeyValuePair<string, string>(prefix+"country", Country));
-
-            return list;
+            
+            if (Address1 != null) yield return new KeyValuePair<string, string>(prefix+"address1", Address1);
+            if (Address2 != null) yield return new KeyValuePair<string, string>(prefix+"address2", Address2);
+            if (City != null) yield return new KeyValuePair<string, string>(prefix+"city", City);
+            if (StateProvince != null) yield return new KeyValuePair<string, string>(prefix+"state", StateProvince);
+            if (PostalZip != null) yield return new KeyValuePair<string, string>(prefix+"zip", PostalZip);
+            if (Country != null) yield return new KeyValuePair<string, string>(prefix+"country", Country);
         }
 
         public static Address FromXmlElement(XElement element)
@@ -57,6 +51,15 @@ namespace PaymentGatewayDotnet.Shared
             };
             return address;
         }
-        
+
+        public IEnumerable<XElement> ToXmlElements()
+        {
+            if (Address1 != null) yield return new XElement("address1", Address1);
+            if (Address2 != null) yield return new XElement("address2", Address2);
+            if (City != null) yield return new XElement("city", City);
+            if (StateProvince != null) yield return new XElement("state", StateProvince);
+            if (PostalZip != null) yield return new XElement("postal", PostalZip);
+            if (Country != null) yield return new XElement("country", Country);
+        }
     }
 }
