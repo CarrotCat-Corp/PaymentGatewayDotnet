@@ -38,9 +38,9 @@ namespace PaymentGatewayDotnet.Shared
             if (element is null) return null;
             var cc = new CreditCard();
 
-            cc.CcNumberMasked = XmlUtilities.XElementToString(element.Element("cc_number"));
+            cc.CcNumberMasked = XmlUtilities.XElementToString(element.Element("cc_number") ?? element.Element("cc-number"));
             cc.CcHash = XmlUtilities.XElementToString(element.Element("cc_hash"));
-            cc.CcExp = XmlUtilities.XElementToString(element.Element("cc_exp"));
+            cc.CcExp = XmlUtilities.XElementToString(element.Element("cc_exp") ?? element.Element("cc-exp"));
             cc.CcStartDate = XmlUtilities.XElementToString(element.Element("cc_start_date"));
             cc.CcIssueNumber = XmlUtilities.XElementToString(element.Element("cc_issue_number"));
             cc.CcBin = XmlUtilities.XElementToString(element.Element("cc_bin"));

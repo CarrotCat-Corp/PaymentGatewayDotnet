@@ -123,7 +123,7 @@ namespace PaymentGatewayDotnet.QueryApi
 
             if (Conditions != null && Conditions.Any()) list.Add(new KeyValuePair<string, string>("condition", string.Join(",",Conditions.Select(a=>ConditionUtils.ToString(a)))));
             if (TransactionType != null) list.Add(new KeyValuePair<string, string>("transaction_type", PaymentTypeUtils.ToShortString(TransactionType)));
-            if (ActionTypes != null && ActionTypes.Any()) list.Add(new KeyValuePair<string, string>("action_type", string.Join(",",ActionTypes.Select(a=>FinancialRequestTypeUtils.ToString(a)))));
+            if (ActionTypes != null && ActionTypes.Any()) list.Add(new KeyValuePair<string, string>("action_type", string.Join(",",ActionTypes.Select(a=>TransactionTypeUtils.ToString(a)))));
             if (Sources != null && Sources.Any()) list.Add(new KeyValuePair<string, string>("source", string.Join(",",Sources.Select(a=>SourceUtils.ToString(a)))));
             if (TransactionIds != null && TransactionIds.Any()) list.Add(new KeyValuePair<string, string>("transaction_id", string.Join(",",TransactionIds)));
             if (SubscriptionIds != null && SubscriptionIds.Any()) list.Add(new KeyValuePair<string, string>("subscription_id", string.Join(",",SubscriptionIds)));

@@ -54,16 +54,43 @@ namespace PaymentGatewayDotnet.Shared
             if (element is null) return null;
             var billing = new Shipping
             {
-                FirstName = XmlUtilities.XElementToString(element.Element("first_name")),
-                LastName = XmlUtilities.XElementToString(element.Element("last_name")),
-                Company = XmlUtilities.XElementToString(element.Element("company")),
-                Email = XmlUtilities.XElementToString(element.Element("email")),
-                Phone = XmlUtilities.XElementToString(element.Element("phone")),
-                Fax = XmlUtilities.XElementToString(element.Element("fax")),
-                Amount = XmlUtilities.XElementToDecimal(element.Element("amount")),
-                // ShipFromPostalCode = XmlUtilities.XElementToString(element.Element("fax")),
-                TrackingNumber = XmlUtilities.XElementToString(element.Element("tracking")),
-                // Address = Address.FromXmlElement(element)
+                Id = XmlUtilities.XElementToString(element.Element("shipping")?.Element("shipping-id")),
+                
+                FirstName = XmlUtilities.XElementToString(
+                    element.Element("first_name") ?? element.Element("shipping")?.Element("first-name")
+                    ),
+                
+                LastName = XmlUtilities.XElementToString(
+                    element.Element("last_name") ?? element.Element("shipping")?.Element("last-name")
+                    ),
+                
+                Company = XmlUtilities.XElementToString(
+                    element.Element("company") ?? element.Element("shipping")?.Element("company")
+                    ),
+                
+                Email = XmlUtilities.XElementToString(
+                    element.Element("email") ?? element.Element("shipping")?.Element("email")
+                    ),
+                
+                Phone = XmlUtilities.XElementToString(
+                    element.Element("phone") ?? element.Element("shipping")?.Element("phone")
+                    ),
+                
+                Fax = XmlUtilities.XElementToString(
+                    element.Element("fax") ?? element.Element("shipping")?.Element("fax")
+                    ),
+                
+                Amount = XmlUtilities.XElementToDecimal(
+                    element.Element("amount") ?? element.Element("shipping-amount")
+                    ),
+                
+                ShipFromPostalCode = XmlUtilities.XElementToString(element.Element("ship-from-postal")),
+                
+                TrackingNumber = XmlUtilities.XElementToString(
+                    element.Element("tracking") ?? element.Element("tracking-number")
+                    ),
+                
+                Address = Address.FromXmlElement(element.Element("shipping"))
 
             };
             return billing;

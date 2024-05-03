@@ -1,4 +1,5 @@
 using System.Web;
+using PaymentGatewayDotnet.Shared;
 
 namespace PaymentGatewayDotnet.PaymentApi.Response
 {
@@ -9,7 +10,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Response
         /// 2 = Transaction Declined
         /// 3 = Error in transaction data or system error 
         /// </summary>
-        public byte? RawResponse { get; } //
+        public int? RawResponse { get; } //
 
         /// <summary>
         /// Textual Response
@@ -69,13 +70,13 @@ namespace PaymentGatewayDotnet.PaymentApi.Response
         /// </summary>
         public string KountScore { get; }
         
-        public TransactionResponse TransactionResponse => TransactionResponseUtils.ParseByte(RawResponse);
+        public TransactionResponse TransactionResponse => TransactionResponseUtils.ParseInt(RawResponse);
         public string ResponseMessage => ResultCodes.GetResponseCodeString(ResponseCode);
         public string AvsResponse => ResultCodes.GetAvsResponseString(RawAvsResponse);
         public string CvvResponse => ResultCodes.GetCvvResponseString(RawCvvResponse);
 
         private PaymentApiResponse(
-            byte? rawResponse = null,
+            int? rawResponse = null,
             string responseText = null,
             string authCode = null,
             string transactionId = null,

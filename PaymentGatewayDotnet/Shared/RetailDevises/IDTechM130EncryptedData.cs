@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data.RetailDevises
+namespace PaymentGatewayDotnet.Shared.RetailDevises
 {
     public sealed class IDTechM130EncryptedData
     {

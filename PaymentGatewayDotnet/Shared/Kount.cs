@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     public sealed class Kount
     {

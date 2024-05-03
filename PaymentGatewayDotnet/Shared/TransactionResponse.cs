@@ -1,4 +1,4 @@
-namespace PaymentGatewayDotnet.PaymentApi.Response
+namespace PaymentGatewayDotnet.Shared
 {
     public enum TransactionResponse
     {
@@ -11,7 +11,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Response
 
     public static class TransactionResponseUtils
     {
-        public static TransactionResponse ParseByte(byte? value)
+        public static TransactionResponse ParseInt(int? value)
         {
             switch (value)
             {

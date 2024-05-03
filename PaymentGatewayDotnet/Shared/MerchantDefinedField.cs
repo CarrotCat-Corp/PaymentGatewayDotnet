@@ -26,5 +26,23 @@ namespace PaymentGatewayDotnet.Shared
 
             return new MerchantDefinedField(idAttributeValue, XmlUtilities.XElementToString(merchantDefinedFieldElement));
         }
+        
+        public static MerchantDefinedField FromXmlElement(XElement merchantDefinedFieldElement, int id)
+        {
+            var value = XmlUtilities.XElementToString(merchantDefinedFieldElement);
+            if (value == null) return null;
+            return new MerchantDefinedField(id, value);
+        }
+
+        public static IEnumerable<MerchantDefinedField> ParseXmlElement(XElement element)
+        {
+            for (var i = 0; i < 20; i++)
+            {
+                if (element.Element("merchant-defined-field-" + i) != null)
+                {
+                    yield return FromXmlElement(element.Element("merchant-defined-field-" + i), i);
+                }
+            }
+        }
     }
 }

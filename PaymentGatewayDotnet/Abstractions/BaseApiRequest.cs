@@ -37,13 +37,8 @@ namespace PaymentGatewayDotnet.Abstractions
 
         protected IEnumerable<XElement> ToXmlElements()
         {
-            var elements = new List<XElement>();
-            
-            elements.Add(new XElement("api-key", SecurityKey));
-            
-            if (!string.IsNullOrEmpty(IpAddress))
-                elements.Add(new XElement("ip-address", IpAddress));
-            return elements;
+            yield return new XElement("api-key", SecurityKey);
+            if (!string.IsNullOrEmpty(IpAddress)) yield return new XElement("ip-address", IpAddress);
         }
     }
 }

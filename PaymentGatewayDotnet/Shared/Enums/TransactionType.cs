@@ -17,7 +17,7 @@ namespace PaymentGatewayDotnet.Shared.Enums
         // CustomerVault
     }
 
-    public static class FinancialRequestTypeUtils
+    public static class TransactionTypeUtils
     {
         /// <summary>
         /// Parses string into FinancialRequestType Enum

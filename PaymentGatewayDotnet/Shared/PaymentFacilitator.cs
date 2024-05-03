@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     public sealed class PaymentFacilitator
     {

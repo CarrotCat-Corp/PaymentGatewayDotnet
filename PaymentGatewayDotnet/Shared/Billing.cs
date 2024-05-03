@@ -89,13 +89,33 @@ namespace PaymentGatewayDotnet.Shared
             if (element is null) return null;
             var billing = new Billing
             {
-                FirstName = XmlUtilities.XElementToString(element.Element("first_name")),
-                LastName = XmlUtilities.XElementToString(element.Element("last_name")),
-                Company = XmlUtilities.XElementToString(element.Element("company")),
-                Email = XmlUtilities.XElementToString(element.Element("email")),
-                Phone = XmlUtilities.XElementToString(element.Element("phone")),
-                Fax = XmlUtilities.XElementToString(element.Element("fax")),
-                Address = Address.FromXmlElement(element)
+                Id = XmlUtilities.XElementToString(element.Element("billing")?.Element("shipping-id")),
+                
+                FirstName = XmlUtilities.XElementToString(
+                    element.Element("first_name") ?? element.Element("billing")?.Element("first-name")
+                ),
+                
+                LastName = XmlUtilities.XElementToString(
+                    element.Element("last_name") ?? element.Element("billing")?.Element("last-name")
+                ),
+                
+                Company = XmlUtilities.XElementToString(
+                    element.Element("company") ?? element.Element("billing")?.Element("company")
+                ),
+                
+                Email = XmlUtilities.XElementToString(
+                    element.Element("email") ?? element.Element("billing")?.Element("email")
+                ),
+                
+                Phone = XmlUtilities.XElementToString(
+                    element.Element("phone") ?? element.Element("billing")?.Element("phone")
+                ),
+                
+                Fax = XmlUtilities.XElementToString(
+                    element.Element("fax") ?? element.Element("billing")?.Element("fax")
+                ),
+                
+                Address = Address.FromXmlElement(element.Element("billing"))
             };
             return billing;
         }

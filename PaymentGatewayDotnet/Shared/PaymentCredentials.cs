@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     public sealed class PaymentCredentials
     {

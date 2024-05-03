@@ -1,4 +1,4 @@
-namespace PaymentGatewayDotnet.PaymentApi.Response
+namespace PaymentGatewayDotnet.Shared
 {
 public static class ResultCodes
 {

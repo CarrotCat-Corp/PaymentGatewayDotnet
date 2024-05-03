@@ -96,36 +96,28 @@ namespace PaymentGatewayDotnet.Shared
             if (AlternateTaxId!=null) yield return new KeyValuePair<string, string>("item_alternate_tax_id_"+item, AlternateTaxId);
         }
         
-        public static List<Item> FromXmlElements(IEnumerable<XElement> productElements)
-        {
-            var xElements = productElements.ToList();
-            if (!xElements.Any()) return null;
-
-            var items = new List<Item>();
-            
-            foreach (var pe in xElements)
-            {
-                items.Add(new Item
-                {
-                    ProductCode = pe.Element("product-code")?.Value, 
-                    Description = pe.Element("description")?.Value, 
-                    CommodityCode = pe.Element("commodity-code")?.Value,
-                    UnitOfMeasure = pe.Element("unit-of-measure")?.Value, 
-                    UnitCost = XmlUtilities.XElementToDecimal(pe.Element("unit-cost")), 
-                    Quantity = XmlUtilities.XElementToDecimal(pe.Element("quantity")), 
-                    TotalAmount = XmlUtilities.XElementToDecimal(pe.Element("total-amount")),
-                    TaxAmount = XmlUtilities.XElementToDecimal(pe.Element("tax-amount")), 
-                    TaxRate = XmlUtilities.XElementToDecimal(pe.Element("tax-rate")), 
-                    DiscountAmount = XmlUtilities.XElementToDecimal(pe.Element("discount-amount")), 
-                    DiscountRate = XmlUtilities.XElementToDecimal(pe.Element("discount-rate")),
-                    TaxType = pe.Element("tax-type")?.Value, 
-                    AlternateTaxId = pe.Element("alternate-tax-id")?.Value
-                });
-            }
-
-            return items;
-        }
+        public static IEnumerable<Item> FromXmlElements(IEnumerable<XElement> productElements) => productElements.Select(FromXmlElement);
         
+
+        public static Item FromXmlElement(XElement element)
+        {
+            return new Item
+            {
+                ProductCode = XmlUtilities.XElementToString(element.Element("product-code")),
+                Description = XmlUtilities.XElementToString(element.Element("description")),
+                CommodityCode = XmlUtilities.XElementToString(element.Element("commodity-code")),
+                UnitOfMeasure = XmlUtilities.XElementToString(element.Element("unit-of-measure")),
+                UnitCost = XmlUtilities.XElementToDecimal(element.Element("unit-cost")), 
+                Quantity = XmlUtilities.XElementToDecimal(element.Element("quantity")), 
+                TotalAmount = XmlUtilities.XElementToDecimal(element.Element("total-amount")),
+                TaxAmount = XmlUtilities.XElementToDecimal(element.Element("tax-amount")), 
+                TaxRate = XmlUtilities.XElementToDecimal(element.Element("tax-rate")), 
+                DiscountAmount = XmlUtilities.XElementToDecimal(element.Element("discount-amount")), 
+                DiscountRate = XmlUtilities.XElementToDecimal(element.Element("discount-rate")),
+                TaxType = XmlUtilities.XElementToString(element.Element("tax-type")),
+                AlternateTaxId = XmlUtilities.XElementToString(element.Element("alternate-tax-id")),
+            };
+        }
         
         public XElement ToXmlElement()
         {

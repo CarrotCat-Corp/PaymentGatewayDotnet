@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.Utilities;
 
 namespace PaymentGatewayDotnet.Shared

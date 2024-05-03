@@ -1,4 +1,4 @@
-namespace PaymentGatewayDotnet.PaymentApi.Data.RetailDevises
+namespace PaymentGatewayDotnet.Shared.RetailDevises
 {
     public enum IngenicoVerificationMethod
     {

@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using PaymentGatewayDotnet.Exceptions;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     /// <summary>
     /// Stored Credentials indicator fields

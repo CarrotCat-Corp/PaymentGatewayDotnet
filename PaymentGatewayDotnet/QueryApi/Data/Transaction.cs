@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using PaymentGatewayDotnet.QueryApi.Enums;
 using PaymentGatewayDotnet.Shared;
@@ -96,7 +97,7 @@ namespace PaymentGatewayDotnet.QueryApi.Data
         public string CcType { get; private set; }
         public string SignatureImage { get; private set; }
 
-        public List<Item> Products { get; private set; }
+        public IEnumerable<Item> Products { get; private set; }
         public List<Action> Actions { get; private set; }
 
 

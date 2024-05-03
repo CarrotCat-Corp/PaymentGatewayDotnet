@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 using PaymentGatewayDotnet.Abstractions;
 using PaymentGatewayDotnet.Contracts;
-using PaymentGatewayDotnet.PaymentApi.Data;
-using PaymentGatewayDotnet.PaymentApi.Data.RetailDevises;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
+using PaymentGatewayDotnet.Shared.RetailDevises;
 
 namespace PaymentGatewayDotnet.PaymentApi.Requests
 {
@@ -145,7 +144,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         {
             var list = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("type", FinancialRequestTypeUtils.ToString(Type)),
+                new KeyValuePair<string, string>("type", TransactionTypeUtils.ToString(Type)),
             };
 
             list.AddRange(base.ToKeyValuePairs());

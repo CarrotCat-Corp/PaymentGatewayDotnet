@@ -2,11 +2,35 @@ using System.Threading.Tasks;
 using PaymentGatewayDotnet.Contracts;
 using PaymentGatewayDotnet.PaymentApi.Response;
 using PaymentGatewayDotnet.QueryApi;
+using PaymentGatewayDotnet.ThreeStepRedirectApi.Responses;
 
 namespace PaymentGatewayDotnet
 {
     public interface IGatewayClient
     {
+        /// <summary>
+        /// Implementation of First step in Three Step Redirect API method.
+        ///
+        /// <br/><br/>
+        /// 
+        /// <br/>
+        /// </summary>
+        /// <param name="request">IThreeStepRequest Object</param>
+        /// <returns>PaymentApiResponse object </returns>
+        Task<StepOneResponse> StepOnePost(IThreeStepRequest request);
+
+        /// <summary>
+        /// Implementation of Payment API (aka Direct Post) method.
+        /// Used for methods that require direct post such as Collect.JS, customer vault transactions, or the Payment API itself.
+        /// <br/><br/>
+        /// Note: Separate PCI certification is required for merchants who store or pass credit card or banking information in unencrypted, or encrypted in in a way that can be decrypted by merchant.
+        /// 
+        /// <br/>
+        /// </summary>
+        /// <param name="request">IPaymentApiRequest Object. I.E. FinancialRequest, InvoicingRequest, RecurringRequest</param>
+        /// <returns>PaymentApiResponse object </returns>
+        Task<StepThreeResponse> StepThreePost(IThreeStepRequest request);
+        
         /// <summary>
         /// Implementation of Payment API (aka Direct Post) method.
         /// Used for methods that require direct post such as Collect.JS, customer vault transactions, or the Payment API itself.

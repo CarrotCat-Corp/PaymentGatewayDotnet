@@ -1,9 +1,11 @@
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using PaymentGatewayDotnet.Contracts;
 using PaymentGatewayDotnet.PaymentApi.Response;
 using PaymentGatewayDotnet.QueryApi;
+using PaymentGatewayDotnet.ThreeStepRedirectApi.Responses;
 
 namespace PaymentGatewayDotnet
 {
@@ -16,6 +18,22 @@ namespace PaymentGatewayDotnet
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.BaseAddress = baseUri??new Uri("https://secure.networkmerchants.com");
+        }
+        
+        public async Task<StepOneResponse> StepOnePost(IThreeStepRequest request)
+        {
+            var formContent = new StringContent(request.ToXml().ToString(), Encoding.UTF8, "application/xml");
+            var response = await _httpClient.PostAsync("api/v2/three-step", formContent);
+            response.EnsureSuccessStatusCode();
+            return StepOneResponse.FromXmlString(await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<StepThreeResponse> StepThreePost(IThreeStepRequest request)
+        {
+            var formContent = new StringContent(request.ToXml().ToString(), Encoding.UTF8, "application/xml");
+            var response = await _httpClient.PostAsync("api/v2/three-step", formContent);
+            response.EnsureSuccessStatusCode();
+            return StepThreeResponse.FromXmlString(await response.Content.ReadAsStringAsync());
         }
 
         public async Task<PaymentApiResponse> PaymentApiPost(IPaymentApiRequest request)

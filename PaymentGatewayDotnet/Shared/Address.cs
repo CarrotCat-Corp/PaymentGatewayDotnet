@@ -11,7 +11,7 @@ namespace PaymentGatewayDotnet.Shared
         public string Address2 { get; set; }
 
         public string City { get; set; }
-        
+
         /// <summary>
         /// Format: CC
         /// </summary>
@@ -28,13 +28,13 @@ namespace PaymentGatewayDotnet.Shared
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs(string prefix = null)
         {
             if (prefix != null && !prefix.EndsWith("_")) prefix = prefix + "_";
-            
-            if (Address1 != null) yield return new KeyValuePair<string, string>(prefix+"address1", Address1);
-            if (Address2 != null) yield return new KeyValuePair<string, string>(prefix+"address2", Address2);
-            if (City != null) yield return new KeyValuePair<string, string>(prefix+"city", City);
-            if (StateProvince != null) yield return new KeyValuePair<string, string>(prefix+"state", StateProvince);
-            if (PostalZip != null) yield return new KeyValuePair<string, string>(prefix+"zip", PostalZip);
-            if (Country != null) yield return new KeyValuePair<string, string>(prefix+"country", Country);
+
+            if (Address1 != null) yield return new KeyValuePair<string, string>(prefix + "address1", Address1);
+            if (Address2 != null) yield return new KeyValuePair<string, string>(prefix + "address2", Address2);
+            if (City != null) yield return new KeyValuePair<string, string>(prefix + "city", City);
+            if (StateProvince != null) yield return new KeyValuePair<string, string>(prefix + "state", StateProvince);
+            if (PostalZip != null) yield return new KeyValuePair<string, string>(prefix + "zip", PostalZip);
+            if (Country != null) yield return new KeyValuePair<string, string>(prefix + "country", Country);
         }
 
         public static Address FromXmlElement(XElement element)
@@ -42,12 +42,12 @@ namespace PaymentGatewayDotnet.Shared
             if (element is null) return null;
             var address = new Address
             {
-                Address1 = XmlUtilities.XElementToString(element.Element("address_1")),
-                Address2 = XmlUtilities.XElementToString(element.Element("address_2")),
-                City = XmlUtilities.XElementToString(element.Element("city")),
-                StateProvince = XmlUtilities.XElementToString(element.Element("state")),
-                PostalZip = XmlUtilities.XElementToString(element.Element("postal_code")),
-                Country = XmlUtilities.XElementToString(element.Element("country"))
+                Address1 = XmlUtilities.XElementToString(element.Element("address_1") ?? element.Element("address1")),
+                Address2 = XmlUtilities.XElementToString(element.Element("address_2") ?? element.Element("address2")),
+                City = XmlUtilities.XElementToString(element.Element("city") ?? element.Element("city")),
+                StateProvince = XmlUtilities.XElementToString(element.Element("state") ?? element.Element("state")),
+                PostalZip = XmlUtilities.XElementToString(element.Element("postal_code") ?? element.Element("postal")),
+                Country = XmlUtilities.XElementToString(element.Element("country") ?? element.Element("company"))
             };
             return address;
         }

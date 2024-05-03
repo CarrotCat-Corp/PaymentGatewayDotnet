@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Xml.Linq;
+using PaymentGatewayDotnet.Utilities;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     
     /// <summary>
@@ -74,6 +74,20 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (ThreeDsVersion != null) yield return new XElement("three-ds-version", ThreeDsVersion);
             if (DirectoryServerId != null) yield return new XElement("directory-server-id", DirectoryServerId);
             if (Eci != null) yield return new XElement("eci", Eci);
+        }
+
+        public static ThreeDSecure FromXmlElement(XElement element)
+        {
+            if (element == null) return null;
+            return new ThreeDSecure
+            {
+                CardholderAuth = XmlUtilities.XElementToString(element.Element("cardholder-auth")),
+                Cavv = XmlUtilities.XElementToString(element.Element("cavv")),
+                Xid = XmlUtilities.XElementToString(element.Element("xid")),
+                ThreeDsVersion = XmlUtilities.XElementToString(element.Element("three-ds-version")),
+                DirectoryServerId = XmlUtilities.XElementToString(element.Element("directory-server-id")),
+                Eci = XmlUtilities.XElementToString(element.Element("eci"))
+            };
         }
     }
 }

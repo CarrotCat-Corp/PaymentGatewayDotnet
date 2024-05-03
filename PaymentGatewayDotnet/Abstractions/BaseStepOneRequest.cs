@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using PaymentGatewayDotnet.Contracts;
 using PaymentGatewayDotnet.Shared;
 
 namespace PaymentGatewayDotnet.Abstractions

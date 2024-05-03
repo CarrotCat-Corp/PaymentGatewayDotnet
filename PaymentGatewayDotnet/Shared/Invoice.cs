@@ -39,7 +39,7 @@ namespace PaymentGatewayDotnet.Shared
         /// What payment methods a customer may use when paying invoice.
         /// Defaults to all available payment methods available in your merchant account
         /// </summary>
-        public IList<PaymentType> PaymentMethodsAllowed { get; set; }
+        public IEnumerable<PaymentType> PaymentMethodsAllowed { get; set; }
 
         /// <summary>
         /// Customer website.
@@ -59,7 +59,7 @@ namespace PaymentGatewayDotnet.Shared
         /// <summary>
         /// Invoice Items
         /// </summary>
-        public List<Item> Items { get; set; }
+        public IEnumerable<Item> Items { get; set; }
 
         /// <summary>
         /// Shipping info
@@ -93,15 +93,17 @@ namespace PaymentGatewayDotnet.Shared
                     : new KeyValuePair<string, string>("payment_terms", PaymentTerms.ToString()));
             }
 
-            if (PaymentMethodsAllowed != null && PaymentMethodsAllowed.Count > 0)
+            if (PaymentMethodsAllowed != null && PaymentMethodsAllowed.Any())
             {
                 list.Add(new KeyValuePair<string, string>("payment_methods_allowed",
                     string.Join(",", PaymentMethodsAllowed.Select(pm => PaymentTypeUtils.ToShortString(pm)))));
             }
 
-            for (int i = 0; i < Items.Count; i++)
+            var i = 0;
+            foreach(var item in Items)
             {
-                list.AddRange(Items[i].ToKeyValuePairs(i + 1));
+                i++;
+                list.AddRange(item.ToKeyValuePairs(i));
             }
 
             if (Shipping != null) list.AddRange(Shipping.ToKeyValuePairs());

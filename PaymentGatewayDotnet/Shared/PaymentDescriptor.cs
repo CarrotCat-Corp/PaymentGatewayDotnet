@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
+using PaymentGatewayDotnet.Utilities;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     /// <summary>
     /// Payment Descriptor Data
@@ -89,6 +90,25 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             if (Mcc != null) yield return new XElement("descriptor-mcc", Mcc);
             if (MerchantId != null) yield return new XElement("descriptor-merchant_id", MerchantId);
             if (Url != null) yield return new XElement("descriptor-url", Url);
+        }
+
+        public static PaymentDescriptor FromXmlElement(XElement document)
+        {
+            if (document == null) return null;
+            var paymentDescriptor = new PaymentDescriptor
+            {
+                Descriptor = XmlUtilities.XElementToString(document.Element("descriptor")),
+                Phone = XmlUtilities.XElementToString(document.Element("descriptor-phone")),
+                Address = XmlUtilities.XElementToString(document.Element("descriptor-address")),
+                City = XmlUtilities.XElementToString(document.Element("descriptor-city")),
+                State = XmlUtilities.XElementToString(document.Element("descriptor-state")),
+                Postal = XmlUtilities.XElementToString(document.Element("descriptor-postal")),
+                Country = XmlUtilities.XElementToString(document.Element("descriptor-country")),
+                Mcc = XmlUtilities.XElementToString(document.Element("descriptor-mcc")),
+                MerchantId = XmlUtilities.XElementToString(document.Element("descriptor-merchant_id")),
+                Url = XmlUtilities.XElementToString(document.Element("descriptor-url"))
+            };
+            return paymentDescriptor;
         }
     }
 }

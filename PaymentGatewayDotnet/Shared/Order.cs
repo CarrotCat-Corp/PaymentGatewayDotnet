@@ -92,21 +92,6 @@ namespace PaymentGatewayDotnet.Shared
             return list;
         }
 
-        public static Order FromXmlElement(XElement element)
-        {
-            if (element is null) return null;
-            var order = new Order
-            {
-                PoNumber = XmlUtilities.XElementToString(element.Element("ponumber")),
-                Id = XmlUtilities.XElementToString(element.Element("orderid")),
-                Description = XmlUtilities.XElementToString(element.Element("order_description")),
-                TaxAmount = XmlUtilities.XElementToDecimal(element.Element("tax"), "tax"),
-                CustomerVatRegistration = XmlUtilities.XElementToString(element.Element("customertaxid"), "customertaxid")
-            };
-
-            return order;
-        }
-
         public IEnumerable<XElement> ToXmlElements()
         {
             if (Id != null)
@@ -167,6 +152,52 @@ namespace PaymentGatewayDotnet.Shared
                     yield return item.ToXmlElement();
                 }
             }
+        }
+
+
+        public static Order FromXmlElement(XElement element)
+        {
+            if (element == null) return null;
+            var order = new Order
+            {
+                Id = XmlUtilities.XElementToString(element.Element("order-id")),
+                
+                OrderDate = XmlUtilities.XElementToDateTime(element.Element("order-date"),"YYMMdd"),
+                
+                Description = XmlUtilities.XElementToString(element.Element("order-description")),
+                
+                TemplateId = XmlUtilities.XElementToString(element.Element("order-template")),
+                
+                PoNumber = XmlUtilities.XElementToString(element.Element("po-number")),
+                
+                TaxAmount = XmlUtilities.XElementToDecimal(element.Element("tax-amount")),
+                
+                DiscountAmount = XmlUtilities.XElementToDecimal(element.Element("discount-amount")),
+                
+                SummaryCommodityCode = XmlUtilities.XElementToString(element.Element("summary-commodity-code")),
+                
+                DutyAmount = XmlUtilities.XElementToDecimal(element.Element("duty-amount")),
+                
+                NationalTaxAmount = XmlUtilities.XElementToDecimal(element.Element("national-tax-amount")),
+                
+                VatTaxAmount = XmlUtilities.XElementToDecimal(element.Element("vat-tax-amount")),
+                
+                VatTaxRate = XmlUtilities.XElementToDecimal(element.Element("vat-tax-rate")),
+                
+                MerchantVatRegistration = XmlUtilities.XElementToString(element.Element("merchant-vat-registration")),
+                
+                CustomerVatRegistration = XmlUtilities.XElementToString(element.Element("customer-vat-registration")),
+                
+                VatInvoiceReferenceNumber = XmlUtilities.XElementToString(element.Element("vat-invoice-reference-number")),
+                
+                AlternateTaxId = XmlUtilities.XElementToString(element.Element("alternate-tax-id")),
+                
+                AlternateTaxAmount = XmlUtilities.XElementToDecimal(element.Element("alternate-tax-amount")),
+                
+                Items = element.Elements("product").Select(Item.FromXmlElement)
+            };
+            
+            return order;
         }
     }
 }

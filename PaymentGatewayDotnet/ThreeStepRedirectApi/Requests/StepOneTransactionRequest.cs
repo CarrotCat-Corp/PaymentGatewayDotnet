@@ -1,11 +1,10 @@
 using System.Xml.Linq;
 using PaymentGatewayDotnet.Abstractions;
 using PaymentGatewayDotnet.Contracts;
-using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.ThreeStepRedirectApi
+namespace PaymentGatewayDotnet.ThreeStepRedirectApi.Requests
 {
     public class StepOneTransactionRequest : BaseStepOneRequest, IThreeStepRequest
     {
@@ -131,7 +130,7 @@ namespace PaymentGatewayDotnet.ThreeStepRedirectApi
                 new XDeclaration("1.0", "UTF-8", "yes")
             );
 
-            var transactionElement = new XElement(FinancialRequestTypeUtils.ToString(Type));
+            var transactionElement = new XElement(TransactionTypeUtils.ToString(Type));
             var baseElements = ToXmlElements();
             foreach (var element in baseElements)
             {

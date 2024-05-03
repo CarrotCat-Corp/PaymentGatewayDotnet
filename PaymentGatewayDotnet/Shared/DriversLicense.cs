@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using PaymentGatewayDotnet.Utilities;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     public sealed class DriversLicense
     {
@@ -13,7 +15,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
         /// <summary>
         /// Driver's license date of birth.
         /// </summary>
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         
         /// <summary>
         /// The state that issued the customer's driver's license.
@@ -29,8 +31,20 @@ namespace PaymentGatewayDotnet.PaymentApi.Data
             return new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("drivers_license_number", Number),
-                new KeyValuePair<string, string>("drivers_license_dob", DateOfBirth?.ToString("d")),
+                new KeyValuePair<string, string>("drivers_license_dob", DateOfBirth),
                 new KeyValuePair<string, string>("drivers_license_state", State)
+            };
+        }
+
+        public static DriversLicense FromXmlElement(XElement element)
+        {
+            if (element == null) return null;
+            
+            return new DriversLicense
+            {
+                Number = XmlUtilities.XElementToString(element.Element("drivers-license-number")),
+                DateOfBirth = XmlUtilities.XElementToString(element.Element("drivers-license-dob")),
+                State = XmlUtilities.XElementToString(element.Element("drivers-license-state"))
             };
         }
     }

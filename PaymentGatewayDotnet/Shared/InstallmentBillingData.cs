@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.PaymentApi.Data
+namespace PaymentGatewayDotnet.Shared
 {
     /// <summary>
     /// Installment billing information

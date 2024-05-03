@@ -2,7 +2,7 @@ using System.Xml.Linq;
 
 namespace PaymentGatewayDotnet.Contracts
 {
-    internal interface IThreeStepRequest
+    public interface IThreeStepRequest
     {
         XDocument ToXml();
     }
