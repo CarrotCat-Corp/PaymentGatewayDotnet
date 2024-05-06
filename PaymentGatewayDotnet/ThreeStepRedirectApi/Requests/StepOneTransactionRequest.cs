@@ -6,7 +6,7 @@ using PaymentGatewayDotnet.Shared.Enums;
 
 namespace PaymentGatewayDotnet.ThreeStepRedirectApi.Requests
 {
-    public class StepOneTransactionRequest : BaseStepOneRequest, IThreeStepRequest
+    public class StepOneTransactionRequest : BaseStepOneRequest, IStepOneRequest
     {
         /// <summary>
         /// The type of transaction to be processed

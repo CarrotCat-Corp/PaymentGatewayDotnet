@@ -3,6 +3,7 @@ using PaymentGatewayDotnet.QueryApi;
 using PaymentGatewayDotnet.QueryApi.Enums;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
+using PaymentGatewayDotnet.ThreeStepRedirectApi.Requests;
 
 namespace PaymentGatewayDotnet.EndToEndTests;
 
@@ -13,6 +14,9 @@ public class GatewayClientTests
     private const string SecurityKey = TestConstants.PrivateSecurityKey;
 
     private const string ExistingOrderId = "33";
+    private const string ExistingTransactionId = "6430237874";
+    private const string RedirectUrl = "https://google.com";
+    
 
     public GatewayClientTests()
     {
@@ -49,9 +53,9 @@ public class GatewayClientTests
     }
 
 
-// Declined transaction with failed AVS and CVV
+    // Declined transaction with failed AVS and CVV
     [Test]
-    public async Task PaymentApiPost_TransactionWithAmountLessThan1_TransactionIsDeclinedAvsAndCvvNoMatch()
+    public async Task PaymentApiPost_TransactionWithAmountLessThan1AndWrongCvv_TransactionIsDeclinedAvsAndCvvNoMatch()
     {
         var request = new TransactionRequest(SecurityKey, TransactionType.Sale)
         {
@@ -83,7 +87,7 @@ public class GatewayClientTests
     [Test]
     public async Task QueryApi_RequestForTransactionsWithSpecificOrder()
     {
-        var request = new QueryApiRequest("5w3R996A7aKd57Cx7vWaauQUBQr2kdMW")
+        var request = new QueryApiRequest(SecurityKey)
         {
             // Conditions = null,
             // TransactionType = null,
@@ -129,13 +133,74 @@ public class GatewayClientTests
             Assert.That(result.Transactions, Has.Count.EqualTo(1));
             Assert.That(result.Transactions[0].OrderId, Is.EqualTo(ExistingOrderId));
         });
-
-        // Assert.Multiple(() =>
-        // {
-        //     Assert.That(result.Transactions.Count, Is.EqualTo(1));
-        //     Assert.That(result.Transactions.Count, Is.EqualTo(0));
-        //     Assert.That(result.Transactions.Count, Is.AtLeast(1));
-        //     Assert.That(result.Transactions.Count, Is.AtMost(1));
-        // });
     }
+    
+    
+    // Query API - Get Receipt
+    [Test]
+    public async Task QueryApiGetReceipt_RequestForReceipt_ReturnsReceiptString()
+    {
+        var request = new QueryApiReceiptRequest(SecurityKey, ExistingTransactionId);
+
+        var result = await _gatewayClient.QueryApiGetReceipt(request);
+
+        Assert.That(result, Is.Not.Null);
+    }
+    
+    
+    /// <summary>
+    /// Multi-step test  to test full three-step process. 
+    /// </summary>
+    [Test]
+    public async Task StepOnePost_ValidThreeStepRequest_ReturnsStepOneResponse()
+    {
+
+        // First Step
+        var request = new StepOneTransactionRequest(SecurityKey, RedirectUrl, TransactionType.Sale);
+
+        var stepOneResponse = await _gatewayClient.StepOnePost(request);
+
+        Assert.That(stepOneResponse, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(stepOneResponse.Result, Is.EqualTo(1));
+            Assert.That(stepOneResponse.FormUrl, Is.Not.Null);
+        });
+        
+        // Second Step - simulating user form fill
+        using var client = new HttpClient();
+        
+        var formContent = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string>("billing-cc-number", TestConstants.TestCardVisa02),
+            new KeyValuePair<string, string>("billing-cc-exp", TestConstants.TestCardExpiration.ToString("MMyy")),
+            new KeyValuePair<string, string>("billing-cc-cvv", TestConstants.Cvv)
+        });
+
+        var stepTwoResponse = await client.PostAsync(stepOneResponse.FormUrl, formContent);
+        
+        Assert.That(stepTwoResponse.StatusCode, Is.AtMost(300));
+        
+        // Step Three
+        //
+        //
+        // var stepThreeResponse = await stepTwoResponse.Content.ReadAsStringAsync();
+        // Assert.That(stepThreeResponse, Is.Not.Null);
+    }
+
+    // Step Three Post
+    // [Test]
+    // public async Task StepThreePost_ValidThreeStepRequest_ReturnsStepThreeResponse()
+    // {
+    //     var request = new StepThreeTransactionRequest(SecurityKey, )
+    //     {
+    //         // fill in the request properties
+    //     };
+    //
+    //     var result = await _gatewayClient.StepThreePost(request);
+    //
+    //     Assert.That(result, Is.Not.Null);
+    // }
+    
+    
 }

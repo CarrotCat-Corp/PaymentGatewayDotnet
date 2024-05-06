@@ -10,7 +10,7 @@ namespace PaymentGatewayDotnet.QueryApi
 {
     public class QueryApiRequest: IQueryApiRequest
     {
-        public string SecurityKey { get; set; }
+        public string SecurityKey { get; private set; }
 
         /// <summary>
         /// A combination of values listed below can be passed and should be separated by commas. For example, to retrieve all transactions pending settlement or complete, the following could be used

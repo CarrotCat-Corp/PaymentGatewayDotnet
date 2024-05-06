@@ -17,7 +17,7 @@ namespace PaymentGatewayDotnet
         /// </summary>
         /// <param name="request">IThreeStepRequest Object</param>
         /// <returns>PaymentApiResponse object </returns>
-        Task<StepOneResponse> StepOnePost(IThreeStepRequest request);
+        Task<StepOneResponse> StepOnePost(IStepOneRequest request);
 
         /// <summary>
         /// Implementation of Payment API (aka Direct Post) method.
@@ -29,7 +29,7 @@ namespace PaymentGatewayDotnet
         /// </summary>
         /// <param name="request">IPaymentApiRequest Object. I.E. FinancialRequest, InvoicingRequest, RecurringRequest</param>
         /// <returns>PaymentApiResponse object </returns>
-        Task<StepThreeResponse> StepThreePost(IThreeStepRequest request);
+        Task<StepThreeResponse> StepThreePost(IStepThreeRequest request);
         
         /// <summary>
         /// Implementation of Payment API (aka Direct Post) method.

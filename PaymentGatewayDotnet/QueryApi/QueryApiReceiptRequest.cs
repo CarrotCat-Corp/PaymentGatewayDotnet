@@ -5,11 +5,14 @@ namespace PaymentGatewayDotnet.QueryApi
 {
     public class QueryApiReceiptRequest: IQueryApiReceiptRequest
     {
-        public string TransactionId { get; }
+        public string SecurityKey { get; private set; }
+        
+        public string TransactionId { get; private set; }
 
-        public QueryApiReceiptRequest(string transactionId)
+        public QueryApiReceiptRequest(string securityKey, string transactionId)
         {
             TransactionId = transactionId;
+            SecurityKey = securityKey;
         }
 
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs()

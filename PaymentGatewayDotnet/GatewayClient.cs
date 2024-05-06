@@ -20,7 +20,7 @@ namespace PaymentGatewayDotnet
             _httpClient.BaseAddress = baseUri??new Uri("https://secure.networkmerchants.com");
         }
         
-        public async Task<StepOneResponse> StepOnePost(IThreeStepRequest request)
+        public async Task<StepOneResponse> StepOnePost(IStepOneRequest request)
         {
             var formContent = new StringContent(request.ToXml().ToString(), Encoding.UTF8, "application/xml");
             var response = await _httpClient.PostAsync("api/v2/three-step", formContent);
@@ -28,7 +28,7 @@ namespace PaymentGatewayDotnet
             return StepOneResponse.FromXmlString(await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<StepThreeResponse> StepThreePost(IThreeStepRequest request)
+        public async Task<StepThreeResponse> StepThreePost(IStepThreeRequest request)
         {
             var formContent = new StringContent(request.ToXml().ToString(), Encoding.UTF8, "application/xml");
             var response = await _httpClient.PostAsync("api/v2/three-step", formContent);
