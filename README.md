@@ -1,6 +1,6 @@
 # PaymentGatewayDotnet
 
-#### v0.1.0-beta
+#### v1.2.0-beta
 
 ---
 
@@ -204,14 +204,17 @@ ChatGPT - Helping me to save some time with especially tedious unit tests.
 
 ## Version History
 
-### v1.0.0
+### v1.1.0
 
 - Added support for Payment API requests
 
-### v1.0.1
+### v1.1.1
 
 - Reworked project structure for better readability
 - Added support for QueryApi
 
-### v1.0.2
+### v1.1.2
 - Added some missing parameters
+
+### v1.2.0
+- Added three-step redirect API support

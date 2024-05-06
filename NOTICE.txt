@@ -1,4 +1,4 @@
 PaymentGatewayDotnet
 
-Please review LICENSE.md before using this library. 
+Please review LICENSE before using this library. 
 

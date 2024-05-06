@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>CarrotCat.PaymentGatewayDotnet</PackageId>
-        <PackageVersion>1.0.2-beta</PackageVersion>
+        <PackageVersion>1.2.0-beta</PackageVersion>
         <Authors>OlegS</Authors>
         <Company>CarrotCat Corp.</Company>
         <Copyright>Copyright 2023 CarrotCat Corp.</Copyright>
