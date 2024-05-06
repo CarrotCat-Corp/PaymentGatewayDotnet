@@ -1,9 +1,7 @@
-using PaymentGatewayDotnet.PaymentApi;
-using PaymentGatewayDotnet.PaymentApi.Data;
-using PaymentGatewayDotnet.PaymentApi.Data.RetailDevises;
 using PaymentGatewayDotnet.PaymentApi.Requests;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
+using PaymentGatewayDotnet.Shared.RetailDevises;
 
 namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Requests;
 
@@ -32,7 +30,8 @@ public class TransactionRequestTests
                 Address = new Address()
                 {
                     Address1 = "abc",
-                }
+                },
+                CustomerReceipt = true,
             },
             Currency = "CAD",
             IpAddress = "999.999.999.999",
@@ -59,7 +58,7 @@ public class TransactionRequestTests
             AuthorizationCode = "abc",
             ThreeDSecure = new ThreeDSecure { Cavv = "abc" },
             DriversLicence = new DriversLicense()
-                { Number = "abc", DateOfBirth = new DateTime(2000, 01, 01), State = "abc" },
+                { Number = "abc", DateOfBirth = "2000-01-01", State = "abc" },
             PartialPayment = new PartialPayment { PartialPaymentType = PartialPaymentType.SettlePartial },
             PaymentFacilitator = new PaymentFacilitator() { Id = "abc" },
             RetailData = new CardDeviceData
@@ -67,7 +66,6 @@ public class TransactionRequestTests
                 UnencryptedRetailMagneticStripeData = new UnencryptedRetailMagneticStripeData { Track1 = "abc" }
             },
             Payment = PaymentType.Cash,
-            CustomerReceipt = true,
             Shipping = new Shipping
             {
                 FirstName = "abc",
@@ -76,7 +74,8 @@ public class TransactionRequestTests
         };
 
         var result = request.ToKeyValuePairs().ToList();
-
+        
+        
         Assert.Multiple(() =>
         {
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("security_key", "123")));

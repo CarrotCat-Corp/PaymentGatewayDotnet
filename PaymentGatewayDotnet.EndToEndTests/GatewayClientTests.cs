@@ -1,4 +1,3 @@
-using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.PaymentApi.Requests;
 using PaymentGatewayDotnet.QueryApi;
 using PaymentGatewayDotnet.QueryApi.Enums;
@@ -12,6 +11,8 @@ public class GatewayClientTests
 {
     private readonly IGatewayClient _gatewayClient;
     private const string SecurityKey = TestConstants.PrivateSecurityKey;
+
+    private const string ExistingOrderId = "33";
 
     public GatewayClientTests()
     {
@@ -33,7 +34,8 @@ public class GatewayClientTests
                 }
             },
             Amount = new decimal(1.01),
-            Billing = new Billing() { Address = new Address() { Address1 = TestConstants.AvsAddress1, PostalZip = TestConstants.AvsZip } },
+            Billing = new Billing()
+                { Address = new Address() { Address1 = TestConstants.AvsAddress1, PostalZip = TestConstants.AvsZip } },
         };
 
         var result = await _gatewayClient.PaymentApiPost(request);
@@ -50,7 +52,7 @@ public class GatewayClientTests
 // Declined transaction with failed AVS and CVV
     [Test]
     public async Task PaymentApiPost_TransactionWithAmountLessThan1_TransactionIsDeclinedAvsAndCvvNoMatch()
-    { 
+    {
         var request = new TransactionRequest(SecurityKey, TransactionType.Sale)
         {
             PaymentCredentials = new PaymentCredentials()
@@ -75,8 +77,8 @@ public class GatewayClientTests
             Assert.That(result.RawCvvResponse, Is.EqualTo("N"));
         });
     }
-    
-    
+
+
     // Query API
     [Test]
     public async Task QueryApi_RequestForTransactionsWithSpecificOrder()
@@ -91,7 +93,7 @@ public class GatewayClientTests
             // SubscriptionIds = null,
             // InvoiceId = "1047",
             // PartialPaymentId = null,
-            OrderId = "10477",
+            OrderId = ExistingOrderId,
             // FirstName = null,
             // LastName = null,
             // Address1 = null,
@@ -121,13 +123,19 @@ public class GatewayClientTests
         };
 
         var result = await _gatewayClient.QueryApiPost(request);
-        
+
         Assert.Multiple(() =>
         {
-            Assert.That(result.Transactions.Count, Is.EqualTo(1));
-            Assert.That(result.Transactions.Count, Is.EqualTo(0));
-            Assert.That(result.Transactions.Count, Is.AtLeast(1));
-            Assert.That(result.Transactions.Count, Is.AtMost(1));
+            Assert.That(result.Transactions, Has.Count.EqualTo(1));
+            Assert.That(result.Transactions[0].OrderId, Is.EqualTo(ExistingOrderId));
         });
+
+        // Assert.Multiple(() =>
+        // {
+        //     Assert.That(result.Transactions.Count, Is.EqualTo(1));
+        //     Assert.That(result.Transactions.Count, Is.EqualTo(0));
+        //     Assert.That(result.Transactions.Count, Is.AtLeast(1));
+        //     Assert.That(result.Transactions.Count, Is.AtMost(1));
+        // });
     }
 }

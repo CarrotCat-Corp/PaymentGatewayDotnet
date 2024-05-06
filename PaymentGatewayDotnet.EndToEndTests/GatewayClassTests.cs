@@ -1,4 +1,3 @@
-using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.PaymentApi.Requests;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
@@ -31,8 +30,8 @@ public class GatewayClassTests
                     Cvv = TestConstants.Cvv
                 }
             },
-            Amount = new decimal(1.01),
-            Billing = new Billing() { Address = new Address() { Address1 = TestConstants.AvsAddress1, PostalZip = TestConstants.AvsZip } },
+            Amount = 1.01m,
+            Billing = new Billing() { Address = new Address() { Address1 = TestConstants.AvsAddress1,  PostalZip = TestConstants.AvsZip } },
         };
 
         var result = await Gateway.PaymentApiPost(request);
@@ -61,7 +60,7 @@ public class GatewayClassTests
                     Cvv = "111"
                 }
             },
-            Amount = new decimal(0.50),
+            Amount = 0.50m,
             Billing = new Billing() { Address = new Address() { Address1 = "abc", PostalZip = "12345" } },
         };
 

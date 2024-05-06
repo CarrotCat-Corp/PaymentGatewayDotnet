@@ -1,9 +1,6 @@
-using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Data;
-
-using NUnit.Framework;
-using System.Collections.Generic;
+namespace PaymentGatewayDotnet.UnitTests.Shared;
 
 [TestFixture]
 public class ThreeDSecureTests
@@ -19,7 +16,7 @@ public class ThreeDSecureTests
             Xid = "xid12345",
             ThreeDsVersion = "2.0.0",
             DirectoryServerId = "d12345-6789-abc",
-            Esi = "12345"
+            Eci = "12345"
         };
 
         // Act

@@ -38,8 +38,9 @@ namespace PaymentGatewayDotnet.Abstractions
             if (ProcessorId != null) list.Add(new KeyValuePair<string, string>("processor_id", ProcessorId));
 
             if (MerchantDefinedFields is null || !MerchantDefinedFields.Any()) return list;
-            
             list.AddRange(MerchantDefinedFields.Select(mdf => mdf.ToKeyValuePair()));
+            
+            if (TestMode == true) list.Add(new KeyValuePair<string, string>("test_mode", "enabled"));
 
             return list;
         }

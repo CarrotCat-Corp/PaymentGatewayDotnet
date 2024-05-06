@@ -1,7 +1,7 @@
-using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Data;
+namespace PaymentGatewayDotnet.UnitTests.Shared;
 
 [TestFixture]
 public class InstallmentBillingDataTests

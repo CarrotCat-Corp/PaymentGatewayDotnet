@@ -1,6 +1,6 @@
-using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Data;
+namespace PaymentGatewayDotnet.UnitTests.Shared;
 
 [TestFixture]
 public class DriversLicenseTests
@@ -12,7 +12,7 @@ public class DriversLicenseTests
         var license = new DriversLicense
         {
             Number = "123456789",
-            DateOfBirth = new DateTime(1990, 5, 15),
+            DateOfBirth = "1990-05-15",
             State = "California"
         };
 

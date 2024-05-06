@@ -64,7 +64,7 @@ namespace PaymentGatewayDotnet.Shared
         
         public IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs(string prefix = null)
         {
-            if (prefix != null) prefix = prefix + "_";
+            if (prefix != null) prefix += "_";
 
             var list = new List<KeyValuePair<string, string>>();
 
@@ -76,6 +76,10 @@ namespace PaymentGatewayDotnet.Shared
             if (Fax != null) list.Add(new KeyValuePair<string, string>(prefix+"fax", Fax));
             if (Email != null) list.Add(new KeyValuePair<string, string>(prefix+"email", Email));
             if (CellPhone != null) list.Add(new KeyValuePair<string, string>(prefix+"cell_phone", Email));
+            
+            if (CustomerReceipt != null)
+                list.Add(new KeyValuePair<string, string>("customer_receipt", CustomerReceipt.ToString().ToLower()));
+            
             
             
             if (Address != null) list.AddRange(Address.ToKeyValuePairs(prefix));

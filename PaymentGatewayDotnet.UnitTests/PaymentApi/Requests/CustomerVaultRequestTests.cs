@@ -1,4 +1,3 @@
-using PaymentGatewayDotnet.PaymentApi.Data;
 using PaymentGatewayDotnet.PaymentApi.Requests;
 using PaymentGatewayDotnet.Shared;
 using PaymentGatewayDotnet.Shared.Enums;

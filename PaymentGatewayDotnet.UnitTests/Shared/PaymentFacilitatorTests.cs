@@ -1,8 +1,8 @@
 
 
-using PaymentGatewayDotnet.PaymentApi.Data;
+using PaymentGatewayDotnet.Shared;
 
-namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Data;
+namespace PaymentGatewayDotnet.UnitTests.Shared;
 
 
 [TestFixture]
