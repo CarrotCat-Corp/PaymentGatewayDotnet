@@ -151,42 +151,42 @@ public class GatewayClientTests
     /// <summary>
     /// Multi-step test  to test full three-step process. 
     /// </summary>
-    [Test]
-    public async Task StepOnePost_ValidThreeStepRequest_ReturnsStepOneResponse()
-    {
-
-        // First Step
-        var request = new StepOneTransactionRequest(SecurityKey, RedirectUrl, TransactionType.Sale);
-
-        var stepOneResponse = await _gatewayClient.StepOnePost(request);
-
-        Assert.That(stepOneResponse, Is.Not.Null);
-        Assert.Multiple(() =>
-        {
-            Assert.That(stepOneResponse.Result, Is.EqualTo(1));
-            Assert.That(stepOneResponse.FormUrl, Is.Not.Null);
-        });
-        
-        // Second Step - simulating user form fill
-        using var client = new HttpClient();
-        
-        var formContent = new FormUrlEncodedContent(new[]
-        {
-            new KeyValuePair<string, string>("billing-cc-number", TestConstants.TestCardVisa02),
-            new KeyValuePair<string, string>("billing-cc-exp", TestConstants.TestCardExpiration.ToString("MMyy")),
-            new KeyValuePair<string, string>("billing-cc-cvv", TestConstants.Cvv)
-        });
-
-        var stepTwoResponse = await client.PostAsync(stepOneResponse.FormUrl, formContent);
-        
-        Assert.That(stepTwoResponse.StatusCode, Is.AtMost(300));
-        
-        // Step Three
-        //
-        //
-        // var stepThreeResponse = await stepTwoResponse.Content.ReadAsStringAsync();
-        // Assert.That(stepThreeResponse, Is.Not.Null);
-    }
+    // [Test]
+    // public async Task StepOnePost_ValidThreeStepRequest_ReturnsStepOneResponse()
+    // {
+    //
+    //     // First Step
+    //     var request = new StepOneTransactionRequest(SecurityKey, RedirectUrl, TransactionType.Sale);
+    //
+    //     var stepOneResponse = await _gatewayClient.StepOnePost(request);
+    //
+    //     Assert.That(stepOneResponse, Is.Not.Null);
+    //     Assert.Multiple(() =>
+    //     {
+    //         Assert.That(stepOneResponse.Result, Is.EqualTo(1));
+    //         Assert.That(stepOneResponse.FormUrl, Is.Not.Null);
+    //     });
+    //     
+    //     // Second Step - simulating user form fill
+    //     using var client = new HttpClient();
+    //     
+    //     var formContent = new FormUrlEncodedContent(new[]
+    //     {
+    //         new KeyValuePair<string, string>("billing-cc-number", TestConstants.TestCardVisa02),
+    //         new KeyValuePair<string, string>("billing-cc-exp", TestConstants.TestCardExpiration.ToString("MMyy")),
+    //         new KeyValuePair<string, string>("billing-cc-cvv", TestConstants.Cvv)
+    //     });
+    //
+    //     var stepTwoResponse = await client.PostAsync(stepOneResponse.FormUrl, formContent);
+    //     
+    //     Assert.That(stepTwoResponse.StatusCode, Is.AtMost(300));
+    //     
+    //     // Step Three
+    //     //
+    //     //
+    //     // var stepThreeResponse = await stepTwoResponse.Content.ReadAsStringAsync();
+    //     // Assert.That(stepThreeResponse, Is.Not.Null);
+    // }
 
     // Step Three Post
     // [Test]

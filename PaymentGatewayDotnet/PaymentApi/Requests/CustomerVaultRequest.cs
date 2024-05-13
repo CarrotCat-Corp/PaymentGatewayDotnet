@@ -14,7 +14,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         }
 
         /// <summary>
-        /// 
+        /// Associate payment information with a Customer Vault record if the transaction is successful.
         /// </summary>
         public CustomerVaultAction Action { get; set; }
 

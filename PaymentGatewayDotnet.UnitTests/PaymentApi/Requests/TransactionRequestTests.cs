@@ -43,6 +43,7 @@ public class TransactionRequestTests
                 PaymentToken = "abc",
             },
             CustomerVaultId = "abc",
+            CustomerVaultAction = CustomerVaultAction.AddCustomer,
             Amount = decimal.One,
             Tip = decimal.One,
             Surcharge = decimal.One,
@@ -74,8 +75,8 @@ public class TransactionRequestTests
         };
 
         var result = request.ToKeyValuePairs().ToList();
-        
-        
+
+
         Assert.Multiple(() =>
         {
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("security_key", "123")));
@@ -111,8 +112,30 @@ public class TransactionRequestTests
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("customer_receipt", "true")));
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("shipping_firstname", "abc")));
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("shipping_address1", "abc")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("customer_vault_id", "abc")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("customer_vault", "add_customer")));
         });
     }
+
+    [Test]
+    public void ToKeyValuePairs_CustomerVaultUpdate_GeneratesValidRequest()
+    {
+        var request = new TransactionRequest("123", TransactionType.Sale)
+        {
+            CustomerVaultId = "abc",
+            CustomerVaultAction = CustomerVaultAction.UpdateCustomer,
+        };
+
+        var result = request.ToKeyValuePairs().ToList();
+
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("customer_vault_id", "abc")));
+            Assert.That(result, Does.Contain(new KeyValuePair<string, string>("customer_vault", "update_customer")));
+        });
+    }
+
 
     [Test]
     public void ToKeyValuePairs_GivenVoidObject_GeneratesValidRequest()

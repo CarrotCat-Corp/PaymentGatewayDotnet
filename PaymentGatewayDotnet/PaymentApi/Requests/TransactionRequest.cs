@@ -68,6 +68,11 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         public string CustomerVaultId { get; set; }
         
         /// <summary>
+        /// Associate payment information with a Customer Vault record if the transaction is successful.
+        /// </summary>
+        public CustomerVaultAction? CustomerVaultAction { get; set; }
+        
+        /// <summary>
         /// Total amount to be charged. For validate, the amount must be omitted or set to 0.00.
         /// </summary>
         public decimal? Amount { get; set; }
@@ -154,6 +159,9 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
             
             if (CustomerVaultId != null) 
                 list.Add(new KeyValuePair<string, string>("customer_vault_id", CustomerVaultId));
+            
+            if (CustomerVaultAction != null) 
+                list.Add(new KeyValuePair<string, string>("customer_vault", CustomerVaultActionUtils.ToString(CustomerVaultAction)));
             
             if (Amount != null) 
                 list.Add(new KeyValuePair<string, string>("amount", Amount?.ToString("F2")));
