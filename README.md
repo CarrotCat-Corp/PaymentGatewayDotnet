@@ -218,3 +218,7 @@ ChatGPT - Helping me to save some time with especially tedious unit tests.
 
 ### v1.2.0
 - Added three-step redirect API support
+
+### v1.2.1
+- Added Customer Vault action to Payment API request to facilitate adding customer records with transactions
+
