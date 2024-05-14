@@ -23,7 +23,7 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         /// Specifies a Customer Vault id. If not set, the payment gateway will randomly generate a Customer Vault id.
         /// </summary>
         public string CustomerVaultId { get; set; }
-        
+
 
         /// <summary>
         /// Specifies a payment gateway transaction id in order to associate payment information with a Subscription or Customer Vault record. Must be set with a 'recurring' or 'customer_vault' action.
@@ -41,13 +41,14 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
         /// The type of payment
         /// </summary>
         public PaymentType Payment { get; set; }
-        
+
         public Billing Billing { get; set; }
 
         /// <summary>
         /// Shipping Information
         /// </summary>
         public Shipping Shipping { get; set; }
+
         public Order Order { get; set; }
 
         /// <summary>
@@ -67,7 +68,8 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
 
             list.AddRange(base.ToKeyValuePairs());
 
-            if (CustomerVaultId != null) list.Add(new KeyValuePair<string, string>("customer_vault_id", CustomerVaultId));
+            if (CustomerVaultId != null)
+                list.Add(new KeyValuePair<string, string>("customer_vault_id", CustomerVaultId));
             if (Currency != null) list.Add(new KeyValuePair<string, string>("currency", Currency));
             if (Action != null)
                 list.Add(new KeyValuePair<string, string>("customer_vault", CustomerVaultActionUtils.ToString(Action)));
@@ -79,11 +81,12 @@ namespace PaymentGatewayDotnet.PaymentApi.Requests
             if (Payment != null)
                 list.Add(new KeyValuePair<string, string>("payment", PaymentTypeUtils.ToString(Payment)));
 
-            list.AddRange(Shipping.ToKeyValuePairs());
+            if (Shipping != null) list.AddRange(Shipping.ToKeyValuePairs());
             if (Billing != null) list.AddRange(Billing.ToKeyValuePairs());
             if (Order != null) list.AddRange(Order.ToKeyValuePairs());
-            list.AddRange(PaymentCredentials.ToKeyValuePairs());
-            list.AddRange(StoredCredentialsIndicatorParameters.ToKeyValuePairs());
+            if (PaymentCredentials != null) list.AddRange(PaymentCredentials.ToKeyValuePairs());
+            if (StoredCredentialsIndicatorParameters != null)
+                list.AddRange(StoredCredentialsIndicatorParameters.ToKeyValuePairs());
 
             return list;
         }

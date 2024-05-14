@@ -7,12 +7,12 @@ namespace PaymentGatewayDotnet.UnitTests.PaymentApi.Requests;
 [TestFixture]
 public class CustomerVaultRequestTests
 {
-        [Test]
-        public void ToString_ObjectCreated_ValidKeyValidPairs()
+    [Test]
+    public void ToString_ObjectCreated_ValidKeyValidPairs()
     {
         var data = new CustomerVaultRequest("123abc", CustomerVaultAction.AddCustomer)
         {
-            Order = new Order(){Id = "abc", Description = "abc"},
+            Order = new Order() { Id = "abc", Description = "abc" },
             Billing = new Billing()
             {
                 Id = "abc",
@@ -35,7 +35,7 @@ public class CustomerVaultRequestTests
             Currency = "CAD",
             IpAddress = "999.999.999.999",
             ProcessorId = "abc",
-            MerchantDefinedFields = new List<MerchantDefinedField>(){new (1, "abc")},
+            MerchantDefinedFields = new List<MerchantDefinedField>() { new(1, "abc") },
             Action = CustomerVaultAction.AddCustomer,
             SourceTransactionId = "abc",
             AutomaticCardUpdaterEnabled = true,
@@ -65,14 +65,14 @@ public class CustomerVaultRequestTests
             },
             PaymentCredentials = new PaymentCredentials()
             {
-                CreditCard = new CreditCard(){Number = "1234567890123456", Expiration = new DateTime(1887, 8, 12)}
+                CreditCard = new CreditCard() { Number = "1234567890123456", Expiration = new DateTime(1887, 8, 12) }
             },
             StoredCredentialsIndicatorParameters = new StoredCredentialsIndicatorParameters
             {
                 InitialTransactionId = "123"
             }
         };
-        
+
         var result = data.ToKeyValuePairs().ToList();
 
         Assert.Multiple(() =>
@@ -114,7 +114,21 @@ public class CustomerVaultRequestTests
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("source_transaction_id", "abc")));
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("acu_enabled", "true")));
             Assert.That(result, Does.Contain(new KeyValuePair<string, string>("merchant_defined_field_1", "abc")));
-
         });
+    }
+
+    [Test]
+    public void ToKeyValuePairs_GivenValidDeleteCommand_ValidKeyValuePairs()
+    {
+        var request = new CustomerVaultRequest("123", CustomerVaultAction.DeleteCustomer)
+        {
+            CustomerVaultId = "qwerty"
+        };
+
+        var result = request.ToKeyValuePairs();
+        
+        Assert.That(result, Does.Contain(new KeyValuePair<string, string>("security_key", "123")));
+        Assert.That(result, Does.Contain(new KeyValuePair<string, string>("customer_vault", "delete_customer")));
+        Assert.That(result, Does.Contain(new KeyValuePair<string, string>("customer_vault_id", "qwerty")));
     }
 }
