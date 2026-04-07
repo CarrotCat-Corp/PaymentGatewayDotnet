@@ -222,3 +222,8 @@ ChatGPT - Helping me to save some time with especially tedious unit tests.
 ### v1.2.1
 - Added Customer Vault action to Payment API request to facilitate adding customer records with transactions
 
+### v1.2.2
+- Fixed customer vault request exception
+
+### v1.2.3
+- Added Original Transaction ID to Query API response

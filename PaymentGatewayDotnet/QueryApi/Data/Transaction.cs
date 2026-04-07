@@ -93,6 +93,7 @@ namespace PaymentGatewayDotnet.QueryApi.Data
         public decimal? CardBalance { get; private set; }
         public decimal? CardAvailableBalance { get; private set; }
         public string EntryMode { get; private set; }
+        public string OriginalTransactionId { get; private set; }
         public string CcBin { get; private set; }
         public string CcType { get; private set; }
         public string SignatureImage { get; private set; }
@@ -193,6 +194,7 @@ namespace PaymentGatewayDotnet.QueryApi.Data
             transaction.CardBalance = XmlUtilities.XElementToDecimal(transactionElement.Element("card_balance"), "card_balance");
             transaction.CardAvailableBalance = XmlUtilities.XElementToDecimal(transactionElement.Element("card_available_balance"), "card_available_balance");
             transaction.EntryMode = XmlUtilities.XElementToString(transactionElement.Element("entry_mode"));
+            transaction.OriginalTransactionId = XmlUtilities.XElementToString(transactionElement.Element("original_transaction_id"));
             transaction.CcBin = XmlUtilities.XElementToString(transactionElement.Element("cc_bin"));
             transaction.CcType = XmlUtilities.XElementToString(transactionElement.Element("cc_type"));
             transaction.SignatureImage = XmlUtilities.XElementToString(transactionElement.Element("signature_image"));
